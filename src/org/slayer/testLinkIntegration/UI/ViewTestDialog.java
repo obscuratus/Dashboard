@@ -18,11 +18,17 @@ public class ViewTestDialog extends DialogWrapper {
 
     private final String[][] data;
     private final String preconditions;
+    private String keywords;
+    private static Dimension savedSize = null;
+    private final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+    private Dimension defaultSize = new Dimension( screen.width/3, screen.height/3 );
+    JPanel pnPanel0 = new JPanel();
 
-    protected ViewTestDialog(@Nullable Project project, String[][] data, String preconditions ) {
+    protected ViewTestDialog(@Nullable Project project, String[][] data, String preconditions, String keywords ) {
         super(project);
         this.data = data;
         this.preconditions = preconditions;
+        this.keywords = keywords;
         init();
         setOKButtonText("Import to current class");
     }
@@ -31,7 +37,7 @@ public class ViewTestDialog extends DialogWrapper {
     @Override
     protected JComponent createCenterPanel() {
 
-        JPanel pnPanel0 = new JPanel();
+
         GridBagLayout gbPanel0 = new GridBagLayout();
         GridBagConstraints gbcPanel0 = new GridBagConstraints();
 
@@ -59,7 +65,7 @@ public class ViewTestDialog extends DialogWrapper {
         tbTable1.setBorder( BorderFactory.createLineBorder( JBColor.BLACK ));
         pnPanel0.add( pane0 );
 
-        String p = preconditions.trim();
+        String p = preconditions.trim() + ( keywords.isEmpty() ? "" : "\n\n\n\nKeywords:" + keywords );
         if ( !p.replace("\n", "").replace(" ", "").isEmpty() ) {
             JTextArea lbLabel1 = new JTextArea(p + " \n\n\n", 10, 10);
             JBScrollPane pane = new JBScrollPane(lbLabel1);
@@ -77,10 +83,24 @@ public class ViewTestDialog extends DialogWrapper {
             pnPanel0.add(pane);
         }
 
-        Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-        pnPanel0.setPreferredSize(new Dimension( screen.width/3, screen.height/3 ));
-        setResizable( false );
+
+        setResizable( true );
+
         return pnPanel0;
 
     }
+
+    public void show()
+    {
+        if ( savedSize == null )
+            pnPanel0.setPreferredSize( defaultSize );
+        else
+            pnPanel0.setPreferredSize( savedSize );
+
+        super.show();
+
+        if ( !getSize().equals( savedSize ) )
+              savedSize = getSize();
+    }
+
 }

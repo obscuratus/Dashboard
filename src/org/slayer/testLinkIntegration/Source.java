@@ -10,6 +10,26 @@ import java.util.List;
  */
 public abstract class Source {
 
+    public enum TEST_STATUS
+    {
+        DISABLED( "Disabled-Auto-Test" ),
+        DEPRECATED( "Deprecated" ),
+        NEED_UPDATE( "Autotest_needs_update");
+
+        private String value;
+
+        TEST_STATUS( String value )
+        {
+            this.value = value;
+        }
+
+        public String toString()
+        {
+            return value;
+        }
+    }
+
+
     Project project;
 
     public void setProject( Project project )
@@ -43,6 +63,11 @@ public abstract class Source {
 
     public abstract List<String> getAllProjectNames();
 
+    public abstract List<String> getTestIdsForUpdate();
+
+    public abstract List<String> getDisabledTestIds();
+
+    public abstract List<String> getDeprecatedTestIds();
 //    public abstract List<TestFolder> getAllTestsHierarchy( String pattern, String parentID );
 
 }

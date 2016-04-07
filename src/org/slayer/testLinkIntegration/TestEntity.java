@@ -20,12 +20,14 @@ public class TestEntity implements Comparable<TestEntity>, Transferable{
     List<StepEntity> stepEntities;
     private String parentID;
     private String icon;
+    private String keywords = "";
 
     public TestEntity( String id, String description )
     {
         this.id = id;
         this.description = description;
         stepEntities = new ArrayList<StepEntity>();
+
     }
 
     public String getClassName()
@@ -94,6 +96,11 @@ public class TestEntity implements Comparable<TestEntity>, Transferable{
         this.dataBaseId = dataBaseId;
     }
 
+    public void gatherKeywords()
+    {
+        keywords = getLabels();
+    }
+
     public void setParentID( String parentID )
     {
         this.parentID = parentID;
@@ -115,7 +122,7 @@ public class TestEntity implements Comparable<TestEntity>, Transferable{
 
     public String getTitle() { return Source.getSource().getTestTitle( dataBaseId ); }
 
-    public String getLabels() { return Source.getSource().getTestLabels( dataBaseId ); }
+    private String getLabels() { return Source.getSource().getTestLabels( dataBaseId ); }
 
     public String getIcon() {
         return icon;
@@ -123,6 +130,11 @@ public class TestEntity implements Comparable<TestEntity>, Transferable{
 
     public void setIcon(String icon) {
         this.icon = icon;
+    }
+
+    public String getKeywords()
+    {
+        return keywords;
     }
 
     @Override
@@ -139,4 +151,6 @@ public class TestEntity implements Comparable<TestEntity>, Transferable{
     public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException, IOException {
         return "asd";
     }
+
+
 }

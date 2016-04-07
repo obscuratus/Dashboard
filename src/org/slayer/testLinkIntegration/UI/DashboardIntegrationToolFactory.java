@@ -3,6 +3,7 @@ package org.slayer.testLinkIntegration.UI;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.ComboBox;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.wm.ToolWindow;
@@ -12,15 +13,18 @@ import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiJavaFile;
 import com.intellij.refactoring.ui.InfoDialog;
+import com.intellij.ui.DocumentAdapter;
 import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentFactory;
 import org.jetbrains.annotations.NotNull;
 import org.slayer.testLinkIntegration.*;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
 import javax.swing.tree.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.font.TextAttribute;
 import java.net.URL;
 import java.util.*;
 import java.util.List;
@@ -32,30 +36,36 @@ import java.util.List;
  */
 public class DashboardIntegrationToolFactory implements ToolWindowFactory {
 
+    private Font defaultFont = null;
+    private Font strikedFont = null;
+    private ListIterator<TreePath> foundTestIter = null;
+    private boolean searchFailed = false;
+
     public static class UIForm {
 
         private JPanel mainPanel;
         private JTree testsTree;
-        private JButton refreshButton;
-        private JButton expandBtn;
-        private JButton collapseBtn;
-        private JTextField searchField;
-        private JLabel foundCount;
-        private JComboBox<Enum> comboBox1;
-        private JComboBox<String> projectPrefix;
-        private JButton settings;
+        private RefreshButton refreshButton;
+        private ExpandButton expandBtn;
+        private CollapseButton collapseBtn;
+        private SearchField searchField;
+        private ComboBox comboBox1;
+        private SettingsButton settings;
+        private NextTestButton nextTestBtn;
         private DefaultMutableTreeNode root;
         private DefaultTreeModel model;
 
         private JPopupMenu popupMenu;
         private List<TreePath> foundPaths = new ArrayList<>();
-        private List<String> projects;
+
     }
 
     private HashMap<Project, UIForm> uiMap = new HashMap<>();
     private UIForm currentForm = null;
     private Project project;
-
+    private List<String> filteredIdsForUpdate = new ArrayList<>();
+    private List<String> disabledTests = new ArrayList<>();
+    private List<String> deprecatedTests = new ArrayList<>();
 
     enum MODE
     {
@@ -63,25 +73,47 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
         Expanded
     }
 
-
+    URL automatedIcon;
+    URL warningIcon;
+    URL disabledIcon;
 
     public DashboardIntegrationToolFactory()
     {
 
+        automatedIcon = this.getClass().getClassLoader().getResource("resources/automated.png");
+        warningIcon = this.getClass().getClassLoader().getResource("resources/warning-icon.png");
+        disabledIcon = this.getClass().getClassLoader().getResource("resources/Erase.png");
 
     }
 
     private void setupForm()
     {
+
+
+        currentForm.comboBox1.addItem(FILTER.Automated);
+        currentForm.comboBox1.addItem(FILTER.Manual);
+        currentForm.comboBox1.addItem(FILTER.All);
+        currentForm.comboBox1.setSelectedItem(FILTER.All);
+
+        currentForm.nextTestBtn.setVisible( false );
         checkSettings();
-        currentForm.projects = Source.getSource().getAllProjectNames();
+       // currentForm.projects = Source.getSource().getAllProjectNames();
 
 
-
+        filteredIdsForUpdate = Source.getSource().getTestIdsForUpdate();
+        disabledTests = Source.getSource().getDisabledTestIds();
+        deprecatedTests = Source.getSource().getDeprecatedTestIds();
         createEmptyTree();
-        ActionFunc refreshAction = (e) -> { createEmptyTree(); updateTestTree(e); };
-        currentForm.refreshButton.addActionListener(refreshAction);
-        currentForm.foundCount.setVisible( false );
+
+        currentForm.refreshButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                createEmptyTree();
+                updateTestTree( null );
+                Messages.showInfoMessage("Refreshing is done", "Tree Update");
+            }
+        });
 
         currentForm.settings.addMouseListener(new MouseAdapter() {
             @Override
@@ -91,14 +123,16 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
 
             }
         });
-//        initContextMenuItems();
 
         currentForm.testsTree.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-//                if ( e.getClickCount() == 2 ) {
-//                    onSelectTreeNode();
-//                }
+                if ( e.getClickCount() == 2 && Boolean.valueOf( SettingsStorage.loadData("doubleClickViewSteps") )) {
+                     int row = currentForm.testsTree.getClosestRowForLocation(e.getX(), e.getY());
+                     currentForm.testsTree.setSelectionRow(row);
+                     viewSteps();
+                }
+
                 initContextMenuItems();
 
                 if (SwingUtilities.isRightMouseButton(e)) {
@@ -146,23 +180,36 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
             }
         });
 
-        currentForm.searchField.addActionListener(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                searchTestInTree();
+        currentForm.searchField.addKeyboardListener(new KeyAdapter() {
 
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+                if ( e.getKeyChar() == KeyEvent.VK_ENTER) {
+                    if ( currentForm.searchField.criteriaChanged ) {
+                         currentForm.searchField.addCurrentTextToHistory();
+                         searchTestInTree();
+
+                         if ( !searchFailed )
+                               currentForm.searchField.criteriaChanged = false;
+                    }
+                    else
+                        nextTest();
+                }
             }
         });
 
-        currentForm.comboBox1.addItem(FILTER.Automated);
-        currentForm.comboBox1.addItem(FILTER.Manual);
-        currentForm.comboBox1.addItem(FILTER.All);
-        currentForm.comboBox1.setSelectedItem(FILTER.All);
-
+        currentForm.searchField.addDocumentListener(new DocumentAdapter() {
+            @Override
+            protected void textChanged(DocumentEvent documentEvent) {
+                currentForm.searchField.criteriaChanged = true;
+            }
+        });
 
         currentForm.comboBox1.addItemListener(e -> {
             if ( e.getStateChange() == ItemEvent.SELECTED )
             {
+
                 currentForm.searchField.setText("");
                 createEmptyTree();
                 addFoldersToTree( FILTER.valueOf(currentForm.comboBox1.getSelectedItem().toString()) );
@@ -187,14 +234,30 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
             }
         });
 
-        while ( currentForm.projects.isEmpty() )
-        {
-            Messages.showErrorDialog(project, "Cannot connect to dashboard " + SettingsStorage.loadData("dashboard.url"), "Connection Error");
-            initSettingsPopup(true, false);
-            currentForm.projects = Source.getSource().getAllProjectNames();
 
-        }
+        currentForm.nextTestBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                nextTest();
+            }
+        });
     }
+
+    private void nextTest()
+    {
+        if ( !foundTestIter.hasNext() ) {
+             foundTestIter = currentForm.foundPaths.listIterator();
+             Messages.showInfoMessage(project, "Cannot find more tests for search criteria.", "Search");
+        }
+
+        TreePath nextPath = foundTestIter.next();
+        currentForm.testsTree.setSelectionPath( nextPath );
+        currentForm.testsTree.scrollPathToVisible( nextPath );
+
+
+    }
+
 
     private void checkSettings() {
         String user = SettingsStorage.loadData("user");
@@ -322,8 +385,14 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
 
     private void createEmptyTree()
     {
+
+
+
+
         currentForm.model = (DefaultTreeModel) currentForm.testsTree.getModel();
         currentForm.root = (DefaultMutableTreeNode) currentForm.model.getRoot();
+
+
 
         currentForm.root.removeAllChildren();
         currentForm.root.setUserObject("Tests");
@@ -333,9 +402,19 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
             @Override
             public Component getTreeCellRendererComponent(JTree tree, Object value, boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus) {
                 super.getTreeCellRendererComponent(tree,value,selected,expanded,leaf,row,hasFocus);
+                StringBuilder sb = new StringBuilder();
+
+                if ( defaultFont == null ) {
+                     defaultFont = getFont();
+                     Font font = new Font("helvetica", Font.PLAIN, 12);
+                     Map  attributes = font.getAttributes();
+                     attributes.put(TextAttribute.STRIKETHROUGH, TextAttribute.STRIKETHROUGH_ON);
+                     strikedFont = new Font(attributes);
+                }
+
                 DefaultMutableTreeNode nodo = (DefaultMutableTreeNode)value;
                 TreeNode t = nodo.getParent();
-                URL automatedIcon = this.getClass().getClassLoader().getResource("resources/automated.png");
+
                 if(t!=null && nodo.getUserObject() instanceof TestEntity && automatedIcon != null ){
                     TestEntity test = (TestEntity) nodo.getUserObject();
                     boolean testAutomated =  test.getIcon().contains("automated");
@@ -350,11 +429,53 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
                         if ( currentForm.comboBox1.getSelectedItem().equals( FILTER.All ) )
                              setVisible( true );
 
-                    setIcon( icon );
+                    List<Icon> icons = new ArrayList<>();
+                    icons.add( icon );
+
+                    if ( disabledTests.contains( test.getDataBaseId() ))
+                    {
+                        icons.add( new ImageIcon( disabledIcon ) );
+                        sb.append("Disabled");
+                    }
+
+                    if ( filteredIdsForUpdate.contains( test.getDataBaseId() ) )
+                    {
+                        icons.add( new ImageIcon( warningIcon ) );
+
+                        if ( !sb.toString().isEmpty() )
+                            sb.append("/");
+
+                        sb.append("Needs update");
+                    }
+
+                        CompoundIcon compoundIcon = new CompoundIcon(CompoundIcon.Axis.Z_AXIS, icons.toArray( new Icon[ icons.size() ]  ) );
+                        setIcon( compoundIcon );
+
+                    if ( deprecatedTests.contains( test.getDataBaseId() )) {
+
+                         if ( !sb.toString().isEmpty() )
+                               sb.append("/");
+
+                         sb.append("Deprecated");
+
+                         setFont( strikedFont );
+                    }
+                    else {
+                         setFont( defaultFont );
+                    }
+
+
+
+
                 }
+                else
+                    setFont( defaultFont );
+
+                setToolTipText( sb.toString() );
                 return this;
             }
         });
+
 
     }
 
@@ -362,44 +483,53 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
 
     private void searchTestInTree() {
 
-
-        for ( int i = 0; i < currentForm.testsTree.getRowCount() - 1; i++)
-            currentForm.testsTree.collapseRow( i );
-
-
-
         if ( currentForm.searchField.getText().isEmpty() ) {
-             currentForm.testsTree.setSelectionPaths( new TreePath[0]);
-             currentForm.foundCount.setVisible(false);
+             currentForm.nextTestBtn.setVisible( false );
+             currentForm.testsTree.setSelectionPaths( new TreePath[0] );
              return;
         }
 
         currentForm.foundPaths.clear();
 
-
-
         Enumeration<DefaultMutableTreeNode> e = currentForm.root.depthFirstEnumeration();
         while ( e.hasMoreElements() )
         {
             DefaultMutableTreeNode node = e.nextElement();
-            if ( node.getUserObject() instanceof TestEntity )
-                 if (  ((TestEntity) node.getUserObject()).getId().contains( currentForm.searchField.getText() ))
+            if ( node.getUserObject() instanceof TestEntity ) {
+
+                 TestEntity test = ((TestEntity) node.getUserObject());
+                 String searchCriteria = currentForm.searchField.getText();
+                 if ( test.getId().contains( searchCriteria ) || test.getDescription().toLowerCase().contains( searchCriteria.toLowerCase() ) )
                  {
-                     currentForm.foundPaths.add( new TreePath( node.getPath() ) );
+                    currentForm.foundPaths.add(new TreePath(node.getPath()));
+
                  }
+            }
+        }
+
+        if ( currentForm.foundPaths.isEmpty() ) {
+             currentForm.nextTestBtn.setVisible( false );
+             currentForm.searchField.markAsInvalid();
+//             Messages.showErrorDialog( project, "Cannot find tests by search criteria: " + currentForm.searchField.getText(), "No Tests Found");
+             searchFailed = true;
+             return;
+        }
+        else {
+            currentForm.nextTestBtn.setVisible( true );
+            searchFailed = false;
+            currentForm.searchField.restoreDefaultColor();
         }
 
 
-        TreeModel model = currentForm.testsTree.getModel();
-        currentForm.testsTree.setModel( null );
-        currentForm.testsTree.setModel( model );
-        currentForm.testsTree.setSelectionPaths( currentForm.foundPaths.toArray( new TreePath[ currentForm.foundPaths.size() ] ) );
+        foundTestIter = currentForm.foundPaths.listIterator();
+
+        currentForm.testsTree.setSelectionPath( foundTestIter.next() );
 
               if ( !currentForm.foundPaths.isEmpty() )
-                  currentForm.testsTree.scrollPathToVisible( currentForm.foundPaths.get( 0 ) );
+                    currentForm.testsTree.scrollPathToVisible( currentForm.foundPaths.get( 0 ) );
 
-              currentForm.foundCount.setText(currentForm.foundPaths.isEmpty() ? "No test found" : "Found tests: " + currentForm.foundPaths.size());
-              currentForm.foundCount.setVisible( true );
+
+
 
     }
 
@@ -414,18 +544,6 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
 
 
         setupForm();
-        currentForm.projects.forEach(currentForm.projectPrefix::addItem);
-        currentForm.projectPrefix.setSelectedItem( SettingsStorage.loadData("projectPrefix").replace("-", "") );
-
-        currentForm.projectPrefix.addItemListener(e -> {
-            if ( e.getStateChange() == ItemEvent.SELECTED )
-            {
-                currentForm.searchField.setText("");
-                createEmptyTree();
-                addFoldersToTree( FILTER.valueOf(currentForm.comboBox1.getSelectedItem().toString()) );
-                SettingsStorage.storeData( "projectPrefix", currentForm.projectPrefix.getSelectedItem().toString() + "-");
-            }
-        });
 
         this.project = project;
         ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
@@ -436,6 +554,8 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
 
     }
 
+
+
     private void updateTestTree( ActionEvent e )
     {
 
@@ -443,9 +563,29 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
 
     }
 
+    private List<Integer> indexes = new ArrayList<>();
+
+    private void saveExpansionState(){
+
+        indexes.clear();
+        for ( int i = 0; i < currentForm.testsTree.getRowCount(); i++ ){
+
+            if ( currentForm.testsTree.isExpanded(i) )
+                 indexes.add( i );
+
+
+        }
+
+    }
+
+    public void setExpansionState(){
+
+        indexes.forEach(currentForm.testsTree::expandRow);
+    }
+
     private void addFoldersToTree( FILTER filter )
     {
-        List<TestFolder> folders = Source.getSource().getAllTestsHierarchy(currentForm.projectPrefix.getSelectedItem().toString(), filter);
+        List<TestFolder> folders = Source.getSource().getAllTestsHierarchy(SettingsStorage.loadData("projectPrefix").replace("-", ""), filter);
 
         HashMap<String, DefaultMutableTreeNode> nodesMap = new HashMap<>();
 
@@ -469,6 +609,7 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
                     TestEntity test = new TestEntity(folder.getTestLinkID(), folder.getDescription());
                     test.setDataBaseId(folder.getId());
                     test.setIcon(folder.getIcon());
+
 
                     testNode.setUserObject(test);
                     nodesMap.get(folder.getParentID()).add(testNode);
@@ -502,7 +643,7 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
 
                     removeAllParentChildren(parent);
 
-                    if ( parent.toString().startsWith("Manual ") )
+                    if (parent.toString().startsWith("Manual "))
                         break;
 
                     p = (DefaultMutableTreeNode) parent.getParent();
@@ -512,11 +653,11 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
                     parentID = ((TestFolder) p.getUserObject()).getParentID();
                 }
 
-            nodesMap.remove(folder.getId());
-        }
+                nodesMap.remove(folder.getId());
+            }
 
 
-    });
+        });
 
         for (Map.Entry<String, DefaultMutableTreeNode> entry : nodesMap.entrySet() )
         {
@@ -534,7 +675,10 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
         else
              currentForm.root.setUserObject("Tests");
 
+//        saveExpansionState();
+
         currentForm.model.reload(currentForm.root);
+//        setExpansionState();
 
     }
 
@@ -547,8 +691,10 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
                     DefaultMutableTreeNode node = ((DefaultMutableTreeNode) children.nextElement());
                     if ( node.getChildCount() > 0 )
                          removeAllParentChildren( node );
-                    else if ( node.getUserObject() instanceof TestFolder )
-                       node.removeFromParent();
+                    else
+                         if ( node.getUserObject() instanceof TestFolder ) {
+                              node.removeFromParent();
+                         }
 
             }
         }
@@ -562,6 +708,7 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
 
             if ( selectedNode.getUserObject() instanceof TestEntity) {
                 TestEntity t = (TestEntity) selectedNode.getUserObject();
+                t.gatherKeywords();
                 List<StepEntity> steps = Source.getSource().getStepsList(t.getDataBaseId());
 
                 String[][] data = new String[steps.size()][2];
@@ -570,7 +717,7 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
                 {
                     StringBuilder stringBuilder = new StringBuilder();
                     stringBuilder
-                            .append( i )
+                            .append( i + 1 )
                             .append(" ")
                             .append(steps.get(i).toString().trim());
                     String step = stringBuilder.toString();
@@ -589,46 +736,26 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
                     data[i][1] = stringBuilder.toString();
                 }
 
-
-               /* for ( StepEntity step : steps )
-                {
-
-
-
-                    if ( !verifySteps.isEmpty() ) {
-                          stringBuilder.append( "----------------------------------------------------------------------------" );
-                          stringBuilder.append("\n\t\tExpected:");
-                    }
-                    for ( String verify : verifySteps )
-                          stringBuilder.append("\n\t").append(verify);
-
-                    stringBuilder.append("\n");
-                    stringBuilder.append( "----------------------------------------------------------------------------" );
-                }*/
-            //    Messages.showMessageDialog( project, "Test: " + t.getId() + "\nSteps:\n" + stringBuilder.toString(), "Test Steps", new ImageIcon());
-
-                ViewTestDialog viewTestDialog = new ViewTestDialog( project, data, t.getPreconditions() );
+                ViewTestDialog viewTestDialog = new ViewTestDialog( project, data, t.getPreconditions(), t.getKeywords() );
                 viewTestDialog.show();
+
                 if ( viewTestDialog.getExitCode() == DialogWrapper.OK_EXIT_CODE )
                      addTestsToClass();
             }
 
     }
 
-    private void initSettingsPopup( boolean cancelDisabled )
-    {
-        initSettingsPopup( cancelDisabled, true );
-    }
 
-    private void initSettingsPopup( boolean cancelDisabled, boolean updateTree )
+    private void initSettingsPopup( boolean cancelDisabled)
     {
         SettingsDialog n = new SettingsDialog( project, cancelDisabled );
         n.show();
         if ( n.getExitCode() == DialogWrapper.OK_EXIT_CODE ) {
-            n.saveData();
-            if ( updateTree ) {
+
+            if ( n.saveData() ) {
                 createEmptyTree();
                 addFoldersToTree(FILTER.valueOf(currentForm.comboBox1.getSelectedItem().toString()));
+                currentForm.searchField.criteriaChanged = true;
             }
         }
     }

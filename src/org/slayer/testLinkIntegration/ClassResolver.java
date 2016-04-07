@@ -102,8 +102,9 @@ public class ClassResolver {
     {
         final String preconditions = testEntity.getPreconditions();
         final String testTitle = testEntity.getTitle();
-        final String testLabels = testEntity.getLabels();
+        final String testLabels = testEntity.getKeywords();
         final boolean classExists = clazzCur != null;
+        final String testId = testEntity.getId();
 
         String description = testEntity.getDescription().replaceAll("\\\\", " ").replaceAll("\"","\\\\\"");
 
@@ -113,7 +114,9 @@ public class ClassResolver {
         methodName = Character.toLowerCase(firstChar) + methodName.substring(1);
 
 
-        final String testId = testEntity.getId();
+        if ( Boolean.valueOf( SettingsStorage.loadData("addTestIdToMethodName") ) )
+             methodName += "_" + testId.replace("-", "");
+
 
         if ( clazzCur == null ) {
 
@@ -134,6 +137,11 @@ public class ClassResolver {
         Objects.requireNonNull( codeBlock, () -> "PsiCodeBlock is null!" );
         for (PsiStatement m : methodBody)
             codeBlock.add(m);
+
+        if ( Boolean.valueOf( SettingsStorage.loadData("addIdToDescription") ) )
+             description = testId + ":" + description;
+
+
 
 
         AllClassesSearch.search( GlobalSearchScope.projectScope( project ), project ).findAll();

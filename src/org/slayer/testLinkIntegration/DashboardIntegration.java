@@ -22,6 +22,9 @@ import java.util.List;
  */
 public class DashboardIntegration extends Source {
 
+
+
+    private static final String filterCasesUrl = "/tree/TestCases/open_node?method=openNode&data%5Bid%5D=1&data%5Bdocid%5D=1&data%5Btype%5D=root&data%5Bproject%5D=_project_id_&data%5Bquick_search%5D=&data%5Bquick_search_entity%5D=testcase_name&data%5Bshow_deleted%5D=&data%5Bfilt%5D%5Bchildren%5D%5B0%5D%5Bid%5D=1459345677232_923&data%5Bfilt%5D%5Bchildren%5D%5B0%5D%5Bsubject%5D%5Bname%5D=testcase&data%5Bfilt%5D%5Bchildren%5D%5B0%5D%5Bsubject%5D%5Bproperty%5D=label&data%5Bfilt%5D%5Bchildren%5D%5B0%5D%5Bsubject%5D%5Bvalue%5D%5B%5D=_STATUS_&data%5Bfilt%5D%5Bchildren%5D%5B0%5D%5Bexpression%5D=contains&data%5Bfilt%5D%5Bchildren%5D%5B0%5D%5Bparent%5D=def-cond-group-1&data%5Bfilt%5D%5Bid%5D=def-cond-group-1&data%5Bfilt%5D%5Boperation%5D=intersect&data%5Bfilt%5D%5Btable%5D=tc_test";
     private static int projectID;
     private static JSONArray actualTestLabels;
     private String jsonString = "[{\"id\":\"1\",\"name\":\"General Web\",\"suffix\":\"GW\"},{\"id\":\"2\",\"name\":\"Express Setup\",\"suffix\":\"ES\"},{\"id\":\"3\",\"name\":\"Import\",\"suffix\":\"IP\"},{\"id\":\"4\",\"name\":\"RC-UBP\",\"suffix\":\"UBP\"},{\"id\":\"5\",\"name\":\"Modano\",\"suffix\":\"CHE\"},{\"id\":\"6\",\"name\":\"ROI Calculator 1.0\",\"suffix\":\"CNVR\"},{\"id\":\"7\",\"name\":\"Performance Measurement\",\"suffix\":\"PM\"},{\"id\":\"8\",\"name\":\"Telephony (black box)\",\"suffix\":\"TBB\"},{\"id\":\"9\",\"name\":\"RC UBP ALL\",\"suffix\":\"UBP\"},{\"id\":\"10\",\"name\":\"Android_SMS\",\"suffix\":\"AASMS\"}]";
@@ -29,9 +32,16 @@ public class DashboardIntegration extends Source {
     private final String getTestCaseUrl = "/testcases/ajax/get?id=%s&method=get&object=Testcase";
     private final String getProjectIdsUrl = "/get_com_projects";
     private String dashboardUrlBackUp = "";
+    private JSONArray actualLabels = null;
+    private JSONArray projectIDs = null;
+
+    List<String> projects = new ArrayList<>();
 
     public List<String> getAllProjectNames() {
-        List<String> projects = new ArrayList<>();
+
+        if ( !projects.isEmpty() )
+              return projects;
+
         try {
 
             JSONArray jsonArray = sendGet(SettingsStorage.loadData("dashboard.url") + getProjectIdsUrl, "");
@@ -157,6 +167,7 @@ public class DashboardIntegration extends Source {
 
             URL url = new URL(rawUrl + getSessionId(rawUrl.endsWith(getProjectIdsUrl)));
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setConnectTimeout( 10000 );
             if (con.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 String inputLine;
                 BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
@@ -228,9 +239,11 @@ public class DashboardIntegration extends Source {
 
         try {
 
-            JSONArray jsonArray = sendGet(SettingsStorage.loadData("dashboard.url") + getProjectIdsUrl, "");
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject project = jsonArray.getJSONObject(i);
+            if ( projectIDs == null )
+                 projectIDs = sendGet(SettingsStorage.loadData("dashboard.url") + getProjectIdsUrl, "");
+
+            for (int i = 0; i < projectIDs.length(); i++) {
+                JSONObject project = projectIDs.getJSONObject(i);
                 String suffix = project.getString("suffix");
                 if (suffix.equals(projectName))
                     return project.getInt("id");
@@ -322,7 +335,6 @@ public class DashboardIntegration extends Source {
         String resultedLabels = "";
 
         try {
-            JSONArray actualLabels = sendGet(SettingsStorage.loadData("dashboard.url") + "/testcases/ajax/getLabel?projectId%5B%5D=" + projectID + "&method=getLabel", "");
 
             dataBaseId = dataBaseId.replace("doc_", "");
             String url = SettingsStorage.loadData("dashboard.url") + String.format(getTestCaseUrl, dataBaseId);
@@ -384,19 +396,60 @@ public class DashboardIntegration extends Source {
 
     private JSONArray getRawList(String pattern) {
         String projectPrefix = pattern.substring(0, pattern.indexOf("-"));
+
         projectID = getProjectID(projectPrefix);
-        SettingsStorage.storeData("projectPrefix", projectPrefix + "-");
+        actualLabels = sendGet(SettingsStorage.loadData("dashboard.url") + "/testcases/ajax/getLabel?projectId%5B%5D=" + projectID + "&method=getLabel", "");
+
+        if ( actualLabels == null )
+             actualLabels = sendGet(SettingsStorage.loadData("dashboard.url") + "/testcases/ajax/getLabel?projectId%5B%5D=" + projectID + "&method=getLabel", "");
+
         return getRawList(pattern, projectID);
     }
 
     private void resolveConnectionError()
     {
         Messages.showErrorDialog( project, "Cannot connect to dashboard " + SettingsStorage.loadData("dashboard.url"), "Connection Error" );
-            SettingsDialog n = new SettingsDialog(project, true);
+            SettingsDialog n = new SettingsDialog(project, true );
             n.show();
             if (n.getExitCode() == DialogWrapper.OK_EXIT_CODE) {
                 n.saveData();
             }
+    }
+
+    public List<String> getTestIdsForUpdate()
+    {
+        return filterTests( TEST_STATUS.NEED_UPDATE );
+    }
+
+    public List<String> getDisabledTestIds()
+    {
+        return filterTests(TEST_STATUS.DISABLED);
+    }
+
+    public List<String> getDeprecatedTestIds()
+    {
+        return filterTests(TEST_STATUS.DEPRECATED);
+    }
+
+    public List<String> filterTests( TEST_STATUS status )
+    {
+        projectID = getProjectID( SettingsStorage.loadData("projectPrefix").replace("-", "") );
+        JSONArray list = sendGet(SettingsStorage.loadData("dashboard.url") +
+                filterCasesUrl.replace( "_project_id_", String.valueOf(projectID) ).replace( "_STATUS_", status.toString() ), "");
+
+        List<String> result = new ArrayList<>();
+        try {
+            for (int i = 0; i < list.length(); i++) {
+                JSONObject obj = (JSONObject) list.get(i);
+                result.add( obj.getString("id") );
+            }
+        }
+        catch (Exception e)
+        {
+            /***/
+        }
+
+        return result;
     }
 
 }
