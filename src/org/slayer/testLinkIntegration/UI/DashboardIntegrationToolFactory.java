@@ -3,9 +3,9 @@ package org.slayer.testLinkIntegration.UI;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.ComboBox;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.util.Key;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowFactory;
 import com.intellij.psi.PsiClass;
@@ -25,7 +25,6 @@ import javax.swing.tree.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.font.TextAttribute;
-import java.net.URL;
 import java.util.*;
 import java.util.List;
 
@@ -40,6 +39,7 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
     private Font strikedFont = null;
     private ListIterator<TreePath> foundTestIter = null;
     private boolean searchFailed = false;
+    private final Key<UIForm> FORM_KEY = new Key<>("UIForm") ;
 
     public static class UIForm {
 
@@ -49,7 +49,7 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
         private ExpandButton expandBtn;
         private CollapseButton collapseBtn;
         private SearchField searchField;
-        private ComboBox comboBox1;
+        private JComboBox<Enum> comboBox1;
         private SettingsButton settings;
         private NextTestButton nextTestBtn;
         private DefaultMutableTreeNode root;
@@ -60,45 +60,42 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
 
     }
 
-    private HashMap<Project, UIForm> uiMap = new HashMap<>();
     private UIForm currentForm = null;
     private Project project;
     private List<String> filteredIdsForUpdate = new ArrayList<>();
     private List<String> disabledTests = new ArrayList<>();
     private List<String> deprecatedTests = new ArrayList<>();
 
-    enum MODE
+    private enum MODE
     {
         Collapsed,
         Expanded
     }
 
-    URL automatedIcon;
-    URL warningIcon;
-    URL disabledIcon;
+    private ImageIcon automatedIcon;
+    private ImageIcon warningIcon;
+    private ImageIcon disabledIcon;
 
     public DashboardIntegrationToolFactory()
     {
+        if ( SettingsStorage.loadData("log.class").isEmpty() )
+             SettingsStorage.storeData("log.class", "kernel.core.logger.Log");
 
-        automatedIcon = this.getClass().getClassLoader().getResource("resources/automated.png");
-        warningIcon = this.getClass().getClassLoader().getResource("resources/warning-icon.png");
-        disabledIcon = this.getClass().getClassLoader().getResource("resources/Erase.png");
-
+        ClassLoader classLoader = this.getClass().getClassLoader();
+        automatedIcon = new ImageIcon( classLoader.getResource("resources/automated.png") );
+        warningIcon = new ImageIcon( classLoader.getResource("resources/warning-icon.png") );
+        disabledIcon = new ImageIcon( classLoader.getResource("resources/Erase.png") );
     }
 
     private void setupForm()
     {
 
+        ComboBoxModel<Enum> comboBoxModel = new DefaultComboBoxModel<>( new FILTER[]{ FILTER.All, FILTER.Automated, FILTER.Manual } );
 
-        currentForm.comboBox1.addItem(FILTER.Automated);
-        currentForm.comboBox1.addItem(FILTER.Manual);
-        currentForm.comboBox1.addItem(FILTER.All);
+        currentForm.comboBox1.setModel( comboBoxModel );
         currentForm.comboBox1.setSelectedItem(FILTER.All);
-
         currentForm.nextTestBtn.setVisible( false );
         checkSettings();
-       // currentForm.projects = Source.getSource().getAllProjectNames();
-
 
         filteredIdsForUpdate = Source.getSource().getTestIdsForUpdate();
         disabledTests = Source.getSource().getDisabledTestIds();
@@ -124,7 +121,7 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
             }
         });
 
-        currentForm.testsTree.addMouseListener(new MouseListener() {
+        currentForm.testsTree.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if ( e.getClickCount() == 2 && Boolean.valueOf( SettingsStorage.loadData("doubleClickViewSteps") )) {
@@ -153,31 +150,11 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
                             currentForm.popupMenu.add(viewItem);
                         }
                     }
-//                    new InfoDialog("Right mouse clicked on: " + (selectedNode.getUserObject() ).toString(), project ).show();
                     currentForm.popupMenu.show(currentForm.testsTree, e.getX(), e.getY());
 
                 }
             }
 
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
         });
 
         currentForm.searchField.addKeyboardListener(new KeyAdapter() {
@@ -186,12 +163,12 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
             public void keyTyped(KeyEvent e) {
 
                 if ( e.getKeyChar() == KeyEvent.VK_ENTER) {
-                    if ( currentForm.searchField.criteriaChanged ) {
+                    if ( currentForm.searchField.isCriteriaChanged() ) {
                          currentForm.searchField.addCurrentTextToHistory();
                          searchTestInTree();
 
                          if ( !searchFailed )
-                               currentForm.searchField.criteriaChanged = false;
+                               currentForm.searchField.setCriteriaChanged( false );
                     }
                     else
                         nextTest();
@@ -202,7 +179,7 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
         currentForm.searchField.addDocumentListener(new DocumentAdapter() {
             @Override
             protected void textChanged(DocumentEvent documentEvent) {
-                currentForm.searchField.criteriaChanged = true;
+                currentForm.searchField.setCriteriaChanged( true );
             }
         });
 
@@ -247,6 +224,7 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
     private void nextTest()
     {
         if ( !foundTestIter.hasNext() ) {
+
              foundTestIter = currentForm.foundPaths.listIterator();
              Messages.showInfoMessage(project, "Cannot find more tests for search criteria.", "Search");
         }
@@ -269,7 +247,7 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
         }
     }
 
-    public void morphTree(JTree tree, MODE mode) {
+    private void morphTree(JTree tree, MODE mode) {
         TreeNode root = (TreeNode) tree.getModel().getRoot();
         morphTree(tree, new TreePath(root), mode);
     }
@@ -298,12 +276,7 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
         JMenuItem importItem = new JMenuItem(new AbstractAction("Import test(s)...") {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) currentForm.testsTree.getLastSelectedPathComponent();
-
-                if ( selectedNode.getUserObject() instanceof TestEntity) {
-                     ClassResolver.resolveClass(project, (TestEntity) selectedNode.getUserObject());
-                }
+                addTestsToClass( null );
             }
         });
 
@@ -322,16 +295,19 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
 
     private void addTestsToClass()
     {
+        Document document = FileEditorManager.getInstance(project).getSelectedTextEditor().getDocument();
+
+        PsiFile file = PsiDocumentManager.getInstance(project).getPsiFile( document );
+        addTestsToClass( ((PsiJavaFile) file).getClasses()[0] );
+    }
+
+    private void addTestsToClass( PsiClass psiClass )
+    {
         DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) currentForm.testsTree.getLastSelectedPathComponent();
         Object obj = selectedNode.getUserObject();
 
         if ( currentForm.testsTree.getSelectionPaths().length > 1 )
         {
-
-            Document document = FileEditorManager.getInstance(project).getSelectedTextEditor().getDocument();
-
-            PsiFile file = PsiDocumentManager.getInstance(project).getPsiFile( document );
-            PsiClass psiClass = ((PsiJavaFile) file).getClasses()[0];
 
             for ( TreePath path : currentForm.testsTree.getSelectionPaths() )
             {
@@ -352,19 +328,12 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
         else
             if ( obj instanceof TestEntity) {
 
-                Document document = FileEditorManager.getInstance(project).getSelectedTextEditor().getDocument();
 
-                PsiFile file = PsiDocumentManager.getInstance(project).getPsiFile( document );
-                PsiClass psiClass = ((PsiJavaFile) file).getClasses()[0];
                 ClassResolver.setCurrentClass( psiClass );
                 ClassResolver.resolveClass(project, (TestEntity) selectedNode.getUserObject());
             }
         else
             if ( obj instanceof TestFolder) {
-                Document document = FileEditorManager.getInstance(project).getSelectedTextEditor().getDocument();
-
-                PsiFile file = PsiDocumentManager.getInstance(project).getPsiFile( document );
-                PsiClass psiClass = ((PsiJavaFile) file).getClasses()[0];
 
                 Enumeration children = selectedNode.children();
                 while ( children.hasMoreElements() ) {
@@ -372,8 +341,14 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
 
                     if ( testNode.getUserObject() instanceof TestEntity ) {
                         TestEntity test = (TestEntity) testNode.getUserObject();
-                        ClassResolver.setCurrentClass(psiClass);
+                        ClassResolver.setCurrentClass( psiClass );
                         ClassResolver.resolveClass( project, test );
+
+                        if ( psiClass == null ) {
+                             Document document = FileEditorManager.getInstance(project).getSelectedTextEditor().getDocument();
+                             PsiFile file = PsiDocumentManager.getInstance(project).getPsiFile(document);
+                             psiClass = ((PsiJavaFile) file).getClasses()[0];
+                        }
                     }
 
 
@@ -385,14 +360,8 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
 
     private void createEmptyTree()
     {
-
-
-
-
         currentForm.model = (DefaultTreeModel) currentForm.testsTree.getModel();
         currentForm.root = (DefaultMutableTreeNode) currentForm.model.getRoot();
-
-
 
         currentForm.root.removeAllChildren();
         currentForm.root.setUserObject("Tests");
@@ -418,7 +387,7 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
                 if(t!=null && nodo.getUserObject() instanceof TestEntity && automatedIcon != null ){
                     TestEntity test = (TestEntity) nodo.getUserObject();
                     boolean testAutomated =  test.getIcon().contains("automated");
-                    Icon icon =  testAutomated ? new ImageIcon( automatedIcon ) :  getDefaultLeafIcon();
+                    Icon icon = testAutomated ? automatedIcon : getDefaultLeafIcon();
 
                         if ( currentForm.comboBox1.getSelectedItem().equals( FILTER.Automated ) && !testAutomated )
                              setVisible( false );
@@ -434,13 +403,13 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
 
                     if ( disabledTests.contains( test.getDataBaseId() ))
                     {
-                        icons.add( new ImageIcon( disabledIcon ) );
+                        icons.add( disabledIcon );
                         sb.append("Disabled");
                     }
 
                     if ( filteredIdsForUpdate.contains( test.getDataBaseId() ) )
                     {
-                        icons.add( new ImageIcon( warningIcon ) );
+                        icons.add( warningIcon );
 
                         if ( !sb.toString().isEmpty() )
                             sb.append("/");
@@ -510,7 +479,6 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
         if ( currentForm.foundPaths.isEmpty() ) {
              currentForm.nextTestBtn.setVisible( false );
              currentForm.searchField.markAsInvalid();
-//             Messages.showErrorDialog( project, "Cannot find tests by search criteria: " + currentForm.searchField.getText(), "No Tests Found");
              searchFailed = true;
              return;
         }
@@ -527,30 +495,24 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
 
               if ( !currentForm.foundPaths.isEmpty() )
                     currentForm.testsTree.scrollPathToVisible( currentForm.foundPaths.get( 0 ) );
-
-
-
-
     }
 
 
     @Override
     public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
 
-        if ( !uiMap.containsKey( project ) )
-              uiMap.put( project, new UIForm() );
 
-        currentForm = uiMap.get( project );
+        if ( project.getUserData( FORM_KEY ) == null )
+             project.putUserData( FORM_KEY, new UIForm() );
 
-
+        currentForm = project.getUserData( FORM_KEY );
         setupForm();
 
         this.project = project;
         ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
         Content content = contentFactory.createContent( currentForm.mainPanel, "", false );
         toolWindow.getContentManager().addContent( content );
-
-        updateTestTree( null );
+        updateTestTree(null);
 
     }
 
@@ -558,29 +520,7 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
 
     private void updateTestTree( ActionEvent e )
     {
-
         addFoldersToTree( FILTER.valueOf( currentForm.comboBox1.getSelectedItem().toString() ) );
-
-    }
-
-    private List<Integer> indexes = new ArrayList<>();
-
-    private void saveExpansionState(){
-
-        indexes.clear();
-        for ( int i = 0; i < currentForm.testsTree.getRowCount(); i++ ){
-
-            if ( currentForm.testsTree.isExpanded(i) )
-                 indexes.add( i );
-
-
-        }
-
-    }
-
-    public void setExpansionState(){
-
-        indexes.forEach(currentForm.testsTree::expandRow);
     }
 
     private void addFoldersToTree( FILTER filter )
@@ -755,7 +695,7 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
             if ( n.saveData() ) {
                 createEmptyTree();
                 addFoldersToTree(FILTER.valueOf(currentForm.comboBox1.getSelectedItem().toString()));
-                currentForm.searchField.criteriaChanged = true;
+                currentForm.searchField.setCriteriaChanged( true );
             }
         }
     }

@@ -79,6 +79,7 @@ public class ClassResolver {
             psiStatements[i] = psiElementFactory.createStatementFromText(log.get(i), null);
         }
 
+
         return psiStatements;
     }
 

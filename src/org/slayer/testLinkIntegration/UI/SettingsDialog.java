@@ -3,6 +3,8 @@ package org.slayer.testLinkIntegration.UI;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.ComboBox;
 import com.intellij.openapi.ui.DialogWrapper;
+import com.intellij.ui.components.JBLabel;
+import com.intellij.ui.components.OnOffButton;
 import org.jetbrains.annotations.Nullable;
 import org.slayer.testLinkIntegration.SettingsStorage;
 import org.slayer.testLinkIntegration.Source;
@@ -16,23 +18,28 @@ import java.util.ArrayList;
 
 public class SettingsDialog extends DialogWrapper{
 
-    JTextField tfText1 = new JTextField( );
-    JPasswordField tfText2  = new JPasswordField( );
-    JTextField tfText3 = new JTextField( );
-    JLabel doubleClickActionLabel = new JLabel( "View test steps by double click:" );
-    JCheckBox doubleClickAction = new JCheckBox( );
+    private JTextField tfText1 = new JTextField( );
+    private JPasswordField tfText2  = new JPasswordField( );
+    private JTextField tfText3 = new JTextField( );
+    private JBLabel doubleClickActionLabel = new JBLabel( "View test steps by double click:" );
+    private OnOffButton doubleClickAction = new OnOffButton( );
 
-    JLabel addIdToDescriptionLabel = new JLabel( "Add test id to description:" );
-    JCheckBox addIdToDescriptionCheckbox = new JCheckBox( );
+    private JBLabel addIdToDescriptionLabel = new JBLabel( "Add test id to description:" );
+    private OnOffButton addIdToDescriptionCheckbox = new OnOffButton( );
 
-    JLabel addTestIdToMethodName = new JLabel( "Add test id to generated method name:" );
-    JCheckBox addTestIdToMethodNameCheckbox = new JCheckBox( );
+    private JBLabel addTestIdToMethodName = new JBLabel( "Add test id to generated method name:" );
+    private OnOffButton addTestIdToMethodNameCheckbox = new OnOffButton( );
 
-    JLabel projectBoxLabel = new JLabel( "Project:" );
-    ComboBox projectsBox;
+    private JBLabel projectBoxLabel = new JBLabel( "Project:" );
+    private ComboBox projectsBox;
+
+    private JBLabel logClassNameLabel = new JBLabel( "Full path to log impl(e.g. 'kernel.core.logger.Log'): " );
+    private JTextField logClassName = new JTextField();
+
+
     private static java.util.List<String> projectNames = new ArrayList<>();
 
-    boolean doubleClickActionSelected = Boolean.valueOf( SettingsStorage.loadData("doubleClickViewSteps") );
+    private boolean doubleClickActionSelected = Boolean.valueOf( SettingsStorage.loadData("doubleClickViewSteps") );
 
     public SettingsDialog( Project project, boolean cancelDisabled ) {
 
@@ -60,6 +67,7 @@ public class SettingsDialog extends DialogWrapper{
         tfText1.setText( SettingsStorage.loadData("user"));
         tfText2.setText( SettingsStorage.loadData("pass"));
         tfText3.setText( SettingsStorage.loadData("dashboard.url"));
+        logClassName.setText( SettingsStorage.loadData("log.class") );
 
         tfText1.setPreferredSize(new Dimension(200, 23));
         tfText2.setPreferredSize(new Dimension(200, 23));
@@ -85,6 +93,7 @@ public class SettingsDialog extends DialogWrapper{
         tfText1.getDocument().addDocumentListener( documentListener );
         tfText2.getDocument().addDocumentListener( documentListener );
         tfText3.getDocument().addDocumentListener( documentListener );
+        logClassName.getDocument().addDocumentListener( documentListener );
 
 
 
@@ -115,7 +124,8 @@ public class SettingsDialog extends DialogWrapper{
                             && tfText3.getText().equals( SettingsStorage.loadData("dashboard.url"))
                             && doubleClickAction.isSelected() == Boolean.valueOf( SettingsStorage.loadData("doubleClickViewSteps") )
                             && addIdToDescriptionCheckbox.isSelected() == Boolean.valueOf( SettingsStorage.loadData("addIdToDescription") )
-                            && addTestIdToMethodNameCheckbox.isSelected() == Boolean.valueOf( SettingsStorage.loadData("addTestIdToMethodName") );
+                            && addTestIdToMethodNameCheckbox.isSelected() == Boolean.valueOf( SettingsStorage.loadData("addTestIdToMethodName") )
+                            && logClassName.getText().equals( SettingsStorage.loadData("log.class") );
 
         if ( !projectNames.isEmpty() )
               validate &= projectsBox.getSelectedItem().toString().equals( SettingsStorage.loadData( "projectPrefix" ) );
@@ -144,6 +154,7 @@ public class SettingsDialog extends DialogWrapper{
         SettingsStorage.storeData("doubleClickViewSteps", String.valueOf( doubleClickAction.isSelected() ) );
         SettingsStorage.storeData("addIdToDescription", String.valueOf( addIdToDescriptionCheckbox.isSelected() ) );
         SettingsStorage.storeData("addTestIdToMethodName", String.valueOf( addTestIdToMethodNameCheckbox.isSelected() ) );
+        SettingsStorage.storeData( "log.class", logClassName.getText() );
 
         if ( projectsBox.getModel().getSize() == 0 ) {
              projectNames = Source.getSource().getAllProjectNames();
@@ -196,7 +207,7 @@ public class SettingsDialog extends DialogWrapper{
              projectsBox.setSelectedItem(SettingsStorage.loadData("projectPrefix").replace("-", ""));
 
 
-        JLabel lbLabel0 = new JLabel( "LDAP User:"  );
+        JBLabel lbLabel0 = new JBLabel( "LDAP User:"  );
         gbcPanel0.gridx = 1;
         gbcPanel0.gridy = 2;
         gbcPanel0.gridwidth = 1;
@@ -209,7 +220,7 @@ public class SettingsDialog extends DialogWrapper{
         pnPanel0.add( lbLabel0 );
 
 
-        JLabel lbLabel1 = new JLabel( "LDAP Password: "  );
+        JBLabel lbLabel1 = new JBLabel( "LDAP Password: "  );
         gbcPanel0.gridx = 1;
         gbcPanel0.gridy = 3;
         gbcPanel0.gridwidth = 1;
@@ -246,7 +257,7 @@ public class SettingsDialog extends DialogWrapper{
         gbPanel0.setConstraints( tfText2, gbcPanel0 );
         pnPanel0.add( tfText2 );
 
-        JLabel lbLabel2 = new JLabel( "Dashboard URL:"  );
+        JBLabel lbLabel2 = new JBLabel( "Dashboard URL:"  );
         gbcPanel0.gridx = 1;
         gbcPanel0.gridy = 4;
         gbcPanel0.gridwidth = 1;
@@ -286,7 +297,7 @@ public class SettingsDialog extends DialogWrapper{
         gbcPanel0.gridy = 5;
         gbcPanel0.gridwidth = 1;
         gbcPanel0.gridheight = 1;
-        gbcPanel0.fill = GridBagConstraints.BOTH;
+        gbcPanel0.fill = GridBagConstraints.WEST;
         gbcPanel0.weightx = 1;
         gbcPanel0.weighty = 1;
         gbcPanel0.anchor = GridBagConstraints.NORTH;
@@ -308,7 +319,7 @@ public class SettingsDialog extends DialogWrapper{
         gbcPanel0.gridy = 6;
         gbcPanel0.gridwidth = 1;
         gbcPanel0.gridheight = 1;
-        gbcPanel0.fill = GridBagConstraints.BOTH;
+        gbcPanel0.fill = GridBagConstraints.WEST;
         gbcPanel0.weightx = 1;
         gbcPanel0.weighty = 1;
         gbcPanel0.anchor = GridBagConstraints.NORTH;
@@ -330,12 +341,34 @@ public class SettingsDialog extends DialogWrapper{
         gbcPanel0.gridy = 7;
         gbcPanel0.gridwidth = 1;
         gbcPanel0.gridheight = 1;
-        gbcPanel0.fill = GridBagConstraints.BOTH;
+        gbcPanel0.fill = GridBagConstraints.WEST;
         gbcPanel0.weightx = 1;
         gbcPanel0.weighty = 1;
         gbcPanel0.anchor = GridBagConstraints.NORTH;
         gbPanel0.setConstraints( addTestIdToMethodNameCheckbox , gbcPanel0 );
         pnPanel0.add( addTestIdToMethodNameCheckbox );
+
+        gbcPanel0.gridx = 1;
+        gbcPanel0.gridy = 8;
+        gbcPanel0.gridwidth = 1;
+        gbcPanel0.gridheight = 1;
+        gbcPanel0.fill = GridBagConstraints.WEST;
+        gbcPanel0.weightx = 1;
+        gbcPanel0.weighty = 1;
+        gbcPanel0.anchor = GridBagConstraints.NORTH;
+        gbPanel0.setConstraints( logClassNameLabel , gbcPanel0 );
+        pnPanel0.add( logClassNameLabel );
+
+        gbcPanel0.gridx = 6;
+        gbcPanel0.gridy = 8;
+        gbcPanel0.gridwidth = 1;
+        gbcPanel0.gridheight = 1;
+        gbcPanel0.fill = GridBagConstraints.BOTH;
+        gbcPanel0.weightx = 1;
+        gbcPanel0.weighty = 1;
+        gbcPanel0.anchor = GridBagConstraints.NORTH;
+        gbPanel0.setConstraints( logClassName, gbcPanel0 );
+        pnPanel0.add( logClassName );
 
         return pnPanel0;
     }

@@ -17,7 +17,7 @@ public class RefreshButton extends ActionButton {
         this(new RefreshButton.Refresh(), new Presentation("Refresh"), "Refresh", new Dimension(24, 24));
     }
 
-    public RefreshButton(AnAction anAction, Presentation presentation, String s, Dimension dimension) {
+    private RefreshButton(AnAction anAction, Presentation presentation, String s, Dimension dimension) {
         super(anAction, presentation, s, dimension);
         presentation.setIcon( AllIcons.Actions.Refresh );
         presentation.setEnabledAndVisible(true);

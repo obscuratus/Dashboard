@@ -1,7 +1,7 @@
 <idea-plugin version="2">
   <id>org.slayer.testLinkIntegration</id>
   <name>Dashboard Integration Plugin</name>
-  <version>2.1.2</version>
+  <version>2.1.7</version>
   <vendor email="obscuratus@breezein.net" url="">Artyom.Rozhkov</vendor>
 
   <description><![CDATA[
@@ -22,7 +22,7 @@
   -->
 
   <extensions defaultExtensionNs="com.intellij">
-      <toolWindow id="Dashboard integration" factoryClass="org.slayer.testLinkIntegration.UI.DashboardIntegrationToolFactory" anchor="right"></toolWindow>
+      <toolWindow icon="/resources/automated.png" id="Dashboard integration" factoryClass="org.slayer.testLinkIntegration.UI.DashboardIntegrationToolFactory" anchor="right" />
     <!--<annotator language ="JAVA" implementationClass="org.slayer.annotator.AccountScenarioValidator"/>-->
     <!--<completion.contributor implementationClass="org.slayer.annotator.AccountSuggestor" language="JAVA"/>-->
     <!--<completion.contributor implementationClass="org.slayer.annotator.FieldNamesSuggestor" language="JAVA"/>-->

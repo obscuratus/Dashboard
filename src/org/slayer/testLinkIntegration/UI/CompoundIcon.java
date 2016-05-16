@@ -14,7 +14,7 @@ import java.awt.*;
  * </ul>
  *
  */
-public class CompoundIcon implements Icon
+class CompoundIcon implements Icon
 {
     public enum Axis
     {

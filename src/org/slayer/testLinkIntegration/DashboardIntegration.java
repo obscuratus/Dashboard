@@ -282,7 +282,11 @@ public class DashboardIntegration extends Source {
                     response.append(inputLine);
                 }
 
-                id = new JSONObject(response.toString()).getString("session_id");
+                String resp = response.toString();
+                if ( resp.contains("session_id") )
+                     resp = resp.substring( resp.indexOf("{\"session_id"));
+
+                id = new JSONObject( resp ).getString("session_id");
             } else if (responceCode == HttpURLConnection.HTTP_UNAUTHORIZED) {
                 throw new WrongCredentialsException("Cannot login to dashboard. Check credentials " + user + ":" + pass);
             } else

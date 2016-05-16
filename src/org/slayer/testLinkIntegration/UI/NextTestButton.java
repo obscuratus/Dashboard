@@ -17,7 +17,7 @@ public class NextTestButton extends ActionButton {
         this(new NextTestButton.Action(), new Presentation("Next test"), "Refresh", new Dimension(24, 24));
     }
 
-    public NextTestButton(AnAction anAction, Presentation presentation, String s, Dimension dimension) {
+    private NextTestButton(AnAction anAction, Presentation presentation, String s, Dimension dimension) {
         super(anAction, presentation, s, dimension);
         presentation.setIcon( AllIcons.Actions.NextOccurence );
         presentation.setEnabledAndVisible(true);

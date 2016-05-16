@@ -8,8 +8,8 @@ import com.intellij.ui.SearchTextField;
  */
 public class SearchField extends SearchTextField {
 
-    public boolean criteriaChanged = false;
-    public final JBColor defaultColor;
+    private boolean criteriaChanged = false;
+    private final JBColor defaultColor;
 
     public SearchField()
     {
@@ -17,12 +17,20 @@ public class SearchField extends SearchTextField {
         defaultColor = new JBColor( this::getForeground );
     }
 
-    public void restoreDefaultColor()
+    void restoreDefaultColor()
     {
         getTextEditor().setForeground( defaultColor );
     }
 
-    public void markAsInvalid() {
+    void markAsInvalid() {
         getTextEditor().setForeground( JBColor.RED );
+    }
+
+    public boolean isCriteriaChanged() {
+        return criteriaChanged;
+    }
+
+    public void setCriteriaChanged(boolean criteriaChanged) {
+        this.criteriaChanged = criteriaChanged;
     }
 }

@@ -44,17 +44,18 @@ public class TestEntity implements Comparable<TestEntity>, Transferable{
     {
         gatherSteps();
         List<String> log = new ArrayList<String>();
-
+        String logClass = SettingsStorage.loadData("log.class");
         int i = 1;
         for ( StepEntity step : stepEntities )
         {
+            step.step = step.step.replaceAll("\\\\\"", "'").replaceAll("\"","'");
             if ( !step.step.trim().isEmpty() )
-                log.add( "kernel.core.logger.Log.step(\"" + i + ". " + step.step + "\");" + "\n" );
+                log.add( logClass + ".step(\"" + i + ". " + step.step + "\");" + "\n" );
 
             log.addAll(
                     step.verifySteps.stream()
                             .filter(verify -> !verify.trim().isEmpty())
-                            .map(verify -> "kernel.core.logger.Log.verify(\"" + verify.trim() + "\", false);").
+                            .map(verify -> logClass + ".verify(\"" + verify.trim() + "\", false);").
                             collect(Collectors.toList()));
 
             i++;
