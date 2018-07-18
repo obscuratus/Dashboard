@@ -71,7 +71,7 @@ public class TestCaseModel implements ChooseByNameModel {
         testEntities = Source.getSource().getTestList( pattern, checkBoxState );
         List<TestEntity> filteredIds = new ArrayList<TestEntity>();
         for ( TestEntity test : testEntities )
-              if ( test.getId().contains( pattern/*.split("-")[1]*/ ) )
+              if ( test.getId().contains( pattern ) )
                    filteredIds.add( test );
 
         Object[] tests = filteredIds.toArray();

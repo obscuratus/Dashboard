@@ -2,6 +2,7 @@ package org.slayer.testLinkIntegration;
 
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.Messages;
+import com.sun.tools.corba.se.idl.ExceptionEntry;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
@@ -23,7 +24,7 @@ import java.util.List;
 public class DashboardIntegration extends Source {
 
 
-
+    private String sessionID = "";
     private static final String filterCasesUrl = "/tree/TestCases/open_node?method=openNode&data%5Bid%5D=1&data%5Bdocid%5D=1&data%5Btype%5D=root&data%5Bproject%5D=_project_id_&data%5Bquick_search%5D=&data%5Bquick_search_entity%5D=testcase_name&data%5Bshow_deleted%5D=&data%5Bfilt%5D%5Bchildren%5D%5B0%5D%5Bid%5D=1459345677232_923&data%5Bfilt%5D%5Bchildren%5D%5B0%5D%5Bsubject%5D%5Bname%5D=testcase&data%5Bfilt%5D%5Bchildren%5D%5B0%5D%5Bsubject%5D%5Bproperty%5D=label&data%5Bfilt%5D%5Bchildren%5D%5B0%5D%5Bsubject%5D%5Bvalue%5D%5B%5D=_STATUS_&data%5Bfilt%5D%5Bchildren%5D%5B0%5D%5Bexpression%5D=contains&data%5Bfilt%5D%5Bchildren%5D%5B0%5D%5Bparent%5D=def-cond-group-1&data%5Bfilt%5D%5Bid%5D=def-cond-group-1&data%5Bfilt%5D%5Boperation%5D=intersect&data%5Bfilt%5D%5Btable%5D=tc_test";
     private static int projectID;
     private static JSONArray actualTestLabels;
@@ -179,8 +180,12 @@ public class DashboardIntegration extends Source {
 
         } catch (Exception e )
         {
-            resolveConnectionError();
-            return sendGet( rawUrl.replaceAll("http://\\d+\\.\\d+\\.\\d+\\.\\d+", SettingsStorage.loadData("dashboard.url")), array );
+            resolveConnectionError( rawUrl, e );
+            String dashboardUrl = SettingsStorage.loadData("dashboard.url");
+            if ( !rawUrl.startsWith( dashboardUrl ) && !rawUrl.startsWith("http://"))
+                  rawUrl = dashboardUrl + rawUrl;
+
+            return sendGet( rawUrl.replaceAll("http://\\d+\\.\\d+\\.\\d+\\.\\d+", dashboardUrl ), array );
         }
 
         try {
@@ -231,7 +236,7 @@ public class DashboardIntegration extends Source {
 
     private JSONArray getRawList(String pattern, int projectID) {
         pattern = pattern.substring(pattern.indexOf("-") + 1);
-        String rawUrl = SettingsStorage.loadData("dashboard.url") + "/tree/TestCases/open_node?method=openNode&data%5Bid%5D=1&data%5Bdocid%5D=1&data%5Btype%5D=root&data%5Bproject%5D=" + projectID + "&data%5Bdel_date%5D=&data%5Bfilter%5D=showFilter%3Dfiltered%26nameFilter%3D%26testname%3D%26testid%3D" + pattern + "%26hideemptynode%3D1";
+        String rawUrl = SettingsStorage.loadData("dashboard.url") + "/tree/TestCases/open_node?method=openNode&id=1&docid=1&type=root&project=" + projectID + "&hideemptynode=1";
         return sendGet(rawUrl, "");
     }
 
@@ -261,54 +266,77 @@ public class DashboardIntegration extends Source {
         return getSessionId(false);
     }
 
-    private String getSessionId(boolean forProjects) {
-        StringBuilder response = new StringBuilder();
-        String id = "";
+
+    private void logout()
+    {
         try {
+            URL url = new URL(SettingsStorage.loadData("dashboard.url") + "/auth/logout");
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.disconnect();
+        }
+        catch ( Exception e ) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private String getSessionId(boolean forProjects) {
+
+//        if ( sessionID == null || sessionID.isEmpty() ) {
+
+            logout();
+            StringBuilder response = new StringBuilder();
+
             String user = SettingsStorage.loadData("user");
             String pass = SettingsStorage.loadData("pass");
+            String sessionUrl = SettingsStorage.loadData("dashboard.url") + "/login?get_session_id=true&user=" + user + "&pass=" + pass;
 
             if (user.isEmpty() || pass.isEmpty())
                 throw new EmptyCredentials("Check credentials, user or pass is empty! User folder: " + System.getProperty("user.home"));
 
-            String sessionUrl = SettingsStorage.loadData("dashboard.url") + "/ged?user=" + user + "&pass=" + pass;
-            URL url = new URL(sessionUrl);
-            HttpURLConnection con = (HttpURLConnection) url.openConnection();
-            int responceCode = con.getResponseCode();
-            if (responceCode == HttpURLConnection.HTTP_OK) {
-                String inputLine;
-                BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-                while ((inputLine = in.readLine()) != null) {
-                    response.append(inputLine);
+            try {
+
+                URL url = new URL(sessionUrl);
+                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                int responceCode = con.getResponseCode();
+                if (responceCode == HttpURLConnection.HTTP_OK) {
+                    String inputLine;
+                    BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                    while ((inputLine = in.readLine()) != null) {
+                        response.append(inputLine);
+                    }
+
+                    String resp = response.toString();
+                    if (resp.contains("session_id"))
+                        resp = resp.substring(resp.indexOf("{\"session_id"));
+                    else
+                        return "";
+
+                    sessionID = new JSONObject(resp).getString("session_id");
+
+                    con.disconnect();
+                } else if (responceCode == HttpURLConnection.HTTP_UNAUTHORIZED) {
+                    throw new WrongCredentialsException("Cannot login to dashboard. Check credentials " + user + ":" + pass);
+                } else {
+                    resolveConnectionError(sessionUrl, null);
+                    return getSessionId(forProjects);
                 }
 
-                String resp = response.toString();
-                if ( resp.contains("session_id") )
-                     resp = resp.substring( resp.indexOf("{\"session_id"));
-
-                id = new JSONObject( resp ).getString("session_id");
-            } else if (responceCode == HttpURLConnection.HTTP_UNAUTHORIZED) {
-                throw new WrongCredentialsException("Cannot login to dashboard. Check credentials " + user + ":" + pass);
-            } else
-            {
-                resolveConnectionError();
-                return getSessionId( forProjects );
+            } catch (Exception e) {
+                resolveConnectionError(sessionUrl, e);
+                return getSessionId(forProjects);
             }
 
-        } catch ( Exception e) {
-            resolveConnectionError();
-            return getSessionId( forProjects );
-        }
+            if (!dashboardUrlBackUp.equals(SettingsStorage.loadData("dashboard.url"))) {
 
-        if (!dashboardUrlBackUp.equals(SettingsStorage.loadData("dashboard.url"))) {
+                dashboardUrlBackUp = SettingsStorage.loadData("dashboard.url");
+            }
 
-            dashboardUrlBackUp = SettingsStorage.loadData("dashboard.url");
-        }
-
+//        }
         if (forProjects)
-            return "?session_id=" + id;
+            return "?session_id=" + sessionID;
         else
-            return "&session_id=" + id;
+            return "&session_id=" + sessionID;
     }
 
     public String getTestPreconditions(String dataBaseId) {
@@ -412,7 +440,12 @@ public class DashboardIntegration extends Source {
 
     private void resolveConnectionError()
     {
-        Messages.showErrorDialog( project, "Cannot connect to dashboard " + SettingsStorage.loadData("dashboard.url"), "Connection Error" );
+        resolveConnectionError( SettingsStorage.loadData("dashboard.url"), null );
+    }
+
+    private void resolveConnectionError( String url, Exception e )
+    {
+        Messages.showErrorDialog( project, "Cannot connect to " + url + ( e != null ? e.getMessage() : ""), "Connection Error" );
             SettingsDialog n = new SettingsDialog(project, true );
             n.show();
             if (n.getExitCode() == DialogWrapper.OK_EXIT_CODE) {

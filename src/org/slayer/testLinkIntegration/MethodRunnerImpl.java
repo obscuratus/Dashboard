@@ -79,6 +79,12 @@ public class MethodRunnerImpl {
             }
 //                }
 
+            if ( preconditions.contains("/*") )
+                 preconditions = preconditions.replace("/*", "##");
+
+            if ( preconditions.contains("*/") )
+                 preconditions = preconditions.replace("*/", "##");
+
             String commentBefore = "/* Title: " + testTitle + "\nPreconditions: " + preconditions + "\nLabels:" + testLabels + "*/";
             psiMethod.addBefore( psiElementFactory.createCommentFromText( commentBefore, null ), psiMethod.getFirstChild() );
 

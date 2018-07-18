@@ -72,12 +72,18 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
         Expanded
     }
 
+    public boolean isDoNotActivateOnStart()
+    {
+        return true;
+    }
+
     private ImageIcon automatedIcon;
     private ImageIcon warningIcon;
     private ImageIcon disabledIcon;
 
     public DashboardIntegrationToolFactory()
     {
+
         if ( SettingsStorage.loadData("log.class").isEmpty() )
              SettingsStorage.storeData("log.class", "kernel.core.logger.Log");
 
