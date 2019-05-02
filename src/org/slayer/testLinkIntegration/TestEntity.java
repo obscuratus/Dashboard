@@ -50,7 +50,12 @@ public class TestEntity implements Comparable<TestEntity>, Transferable{
             String logClass = SettingsStorage.loadData("log.class");
             int i = 1;
             for (StepEntity step : stepEntities) {
-                step.step = step.step.replaceAll("\\\\\"", "'").replaceAll("\"", "'");
+                step.step = step.step.replaceAll("\\\\\"", "'").replaceAll("\r", "")
+                        .replaceAll("\n", "")
+                        .replaceAll("\t", "")
+                        .replaceAll("\\.\\.", "")
+                        .replaceAll("\"", "'");
+
                 if (!step.step.trim().isEmpty())
                     log.add(logClass + ".step(\"" + i + ". " + step.step + "\");" + "\n");
 
