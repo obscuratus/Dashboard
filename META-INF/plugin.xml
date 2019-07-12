@@ -1,7 +1,7 @@
 <idea-plugin version="2">
   <id>org.slayer.testLinkIntegration</id>
   <name>Dashboard Integration Plugin</name>
-  <version>2.2.5</version>
+  <version>2.2.7</version>
   <vendor email="obscuratus@breezein.net" url="">Artyom.Rozhkov</vendor>
 
   <description><![CDATA[
@@ -13,7 +13,7 @@
   </change-notes>
 
   <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
-  <idea-version since-build="123"/>
+  <idea-version since-build="162"/>
 
   <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
        on how to target different products -->

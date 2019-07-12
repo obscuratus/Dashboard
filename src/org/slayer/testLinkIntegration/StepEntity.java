@@ -1,5 +1,7 @@
 package org.slayer.testLinkIntegration;
 
+import org.apache.commons.lang.StringEscapeUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,12 +15,13 @@ public class StepEntity {
 
     public StepEntity( String step )
     {
-        this.step = step;
+        this.step = StringEscapeUtils.escapeJava( step );
         this.verifySteps = new ArrayList<String>();
     }
 
     public void addVerify( String verify )
     {
+        verify = StringEscapeUtils.escapeJava( verify );
         verifySteps.add( verify );
     }
 

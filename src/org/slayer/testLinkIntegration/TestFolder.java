@@ -8,36 +8,35 @@ import java.util.List;
  */
 public class TestFolder{
 
-    private List<TestFolder> subFolders = new ArrayList<>();
-    private List<TestEntity> rootTests = new ArrayList<>();
-    private String id;
-    private String desc;
-    private String parentID;
+    private String itemId;
+    private String name;
+    private String parentId;
     private boolean isFolder;
     private boolean isTest;
-    private String icon;
+    private String type = "";
+    private String icon = "";
     private String testLinkID = "";
     private int childrenCount = 0;
 
     public TestFolder( String id, String desc, String parentID )
     {
-        this.id = id;
-        this.desc = desc.replaceAll("<span class=\"counttest\">","").replaceAll("\\d+</span>","").replace("</span>", "").replaceAll("\\(\\d+\\)", "");
-        this.parentID = parentID;
+        this.itemId = id;
+        this.name = desc.replaceAll("<span class=\"counttest\">","").replaceAll("\\d+</span>","").replace("</span>", "").replaceAll("\\(\\d+\\)", "");
+        this.parentId = parentID;
     }
 
     public boolean isFolder()
     {
-        return isFolder;
+        return isFolder || type.equalsIgnoreCase("suite");
     }
 
     public String getDescription() {
-        return desc;
+        return name;
     }
 
     public String toString()
     {
-        return testLinkID.isEmpty() ? desc + "(" + childrenCount + ")" : testLinkID + " : " + desc;
+        return testLinkID.isEmpty() ? name + "(" + childrenCount + ")" : testLinkID + " : " + name;
     }
 
     public void setIsFolder(boolean isFolder) {
@@ -45,7 +44,7 @@ public class TestFolder{
     }
 
     public boolean isTest() {
-        return isTest;
+        return isTest || type.equalsIgnoreCase("case");
     }
 
     public void setIsTest(boolean isTest) {
@@ -53,18 +52,23 @@ public class TestFolder{
     }
 
     public String getId() {
-        return id;
+        return itemId;
     }
 
     public String getParentID() {
-        return parentID;
+        return parentId;
     }
 
     public void setTestLinkID( String testLinkID )
     {
-        this.testLinkID = testLinkID.substring(testLinkID.indexOf(">") + 1, testLinkID.indexOf("</")).replace("&ndash;", "-");
-        String prefix = this.testLinkID.substring(0, this.testLinkID.indexOf("-"));
-        desc = desc.replace("<span class=project>" + prefix + "&ndash;", "");
+        if ( !Source.isEinstein() ) {
+              this.testLinkID = testLinkID.substring(testLinkID.indexOf(">") + 1, testLinkID.indexOf("</")).replace("&ndash;", "-");
+              String prefix = this.testLinkID.substring(0, this.testLinkID.indexOf("-"));
+              name = name.replace("<span class=project>" + prefix + "&ndash;", "");
+        } else {
+            this.testLinkID = SettingsStorage.loadData("projectPrefix") + "-" + testLinkID;
+
+        }
     }
 
     public String getTestLinkID() {

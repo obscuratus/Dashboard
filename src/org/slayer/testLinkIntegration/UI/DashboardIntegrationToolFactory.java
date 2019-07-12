@@ -115,6 +115,7 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
                 createEmptyTree();
                 updateTestTree( null );
                 Messages.showInfoMessage("Refreshing is done", "Tree Update");
+                Source.getSource().clearCache();
             }
         });
 
@@ -390,7 +391,7 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
                 DefaultMutableTreeNode nodo = (DefaultMutableTreeNode)value;
                 TreeNode t = nodo.getParent();
 
-                if(t!=null && nodo.getUserObject() instanceof TestEntity && automatedIcon != null ){
+                if( t!=null && nodo.getUserObject() instanceof TestEntity && automatedIcon != null ){
                     TestEntity test = (TestEntity) nodo.getUserObject();
                     boolean testAutomated =  test.getIcon().contains("automated");
                     Icon icon = testAutomated ? automatedIcon : getDefaultLeafIcon();
@@ -407,40 +408,40 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
                     List<Icon> icons = new ArrayList<>();
                     icons.add( icon );
 
-                    if ( disabledTests.contains( test.getDataBaseId() ))
-                    {
-                        icons.add( disabledIcon );
-                        sb.append("Disabled");
-                    }
+                    if ( test.getDataBaseId() != null ) {
 
-                    if ( filteredIdsForUpdate.contains( test.getDataBaseId() ) )
-                    {
-                        icons.add( warningIcon );
+                         if (disabledTests.contains(test.getDataBaseId())) {
+                             icons.add(disabledIcon);
+                             sb.append("Disabled");
+                         }
 
-                        if ( !sb.toString().isEmpty() )
-                            sb.append("/");
+                         if (filteredIdsForUpdate.contains(test.getDataBaseId())) {
+                             icons.add(warningIcon);
 
-                        sb.append("Needs update");
+                             if (!sb.toString().isEmpty())
+                                 sb.append("/");
+
+                             sb.append("Needs update");
+                         }
+
+                        if ( deprecatedTests.contains( test.getDataBaseId() )) {
+
+                            if ( !sb.toString().isEmpty() )
+                                sb.append("/");
+
+                            sb.append("Deprecated");
+
+                            setFont( strikedFont );
+                        } else {
+                            setFont( defaultFont );
+                        }
+
+                    }  else {
+                        setFont( defaultFont );
                     }
 
                         CompoundIcon compoundIcon = new CompoundIcon(CompoundIcon.Axis.Z_AXIS, icons.toArray( new Icon[ icons.size() ]  ) );
                         setIcon( compoundIcon );
-
-                    if ( deprecatedTests.contains( test.getDataBaseId() )) {
-
-                         if ( !sb.toString().isEmpty() )
-                               sb.append("/");
-
-                         sb.append("Deprecated");
-
-                         setFont( strikedFont );
-                    }
-                    else {
-                         setFont( defaultFont );
-                    }
-
-
-
 
                 }
                 else
@@ -532,15 +533,18 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
     private void addFoldersToTree( FILTER filter )
     {
         List<TestFolder> folders = Source.getSource().getAllTestsHierarchy(SettingsStorage.loadData("projectPrefix").replace("-", ""), filter);
-
         HashMap<String, DefaultMutableTreeNode> nodesMap = new HashMap<>();
 
+        if ( Source.isEinstein() ) {
+             TestFolder rootFolder = new TestFolder("0", "Manual", "0");
+             nodesMap.put( "0", new DefaultMutableTreeNode( rootFolder ) );
+             currentForm.root.add( nodesMap.get( "0" ) );
+        }
 
         for ( TestFolder folder : folders ) {
-              DefaultMutableTreeNode node = new DefaultMutableTreeNode( folder );
 
               if ( folder.isFolder() )
-                   nodesMap.put( folder.getId(), node );
+                   nodesMap.put( folder.getId(), new DefaultMutableTreeNode( folder ) );
         }
 
         for ( TestFolder folder : folders )
@@ -567,7 +571,7 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
 
 
             if ( folder.getId().equals("3777") || folder.getDescription().equals("Manual ")  )
-                currentForm.root.add( nodesMap.get( folder.getId() ));
+                 currentForm.root.add( nodesMap.get( folder.getId() ));
         }
 
 
@@ -589,7 +593,7 @@ public class DashboardIntegrationToolFactory implements ToolWindowFactory {
 
                     removeAllParentChildren(parent);
 
-                    if (parent.toString().startsWith("Manual "))
+                    if (parent.toString().startsWith("Manual"))
                         break;
 
                     p = (DefaultMutableTreeNode) parent.getParent();

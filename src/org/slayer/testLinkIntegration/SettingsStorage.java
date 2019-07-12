@@ -3,6 +3,7 @@ package org.slayer.testLinkIntegration;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Properties;
 
 /**
@@ -44,7 +45,7 @@ public class SettingsStorage {
     {
 
         Properties properties = new Properties();
-
+        FileInputStream fs = null;
             try {
 
                 if ( settingsFile == null )
@@ -53,12 +54,24 @@ public class SettingsStorage {
                     settingsFile = new File( path + "/settings.ini" );
                 }
 
-                if ( settingsFile.exists() )
-                     properties.load( new FileInputStream( settingsFile ));
+                if ( settingsFile.exists() ) {
+                     fs = new FileInputStream(settingsFile);
+                     properties.load(fs);
+                }
 
             } catch (Exception e) {
 
+                e.printStackTrace();
                 return "";
+            }
+            finally {
+                if ( fs != null ) {
+                    try {
+                        fs.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
 
         return properties.containsKey( key ) ? properties.getProperty( key ) : "";

@@ -59,8 +59,7 @@ public class SettingsDialog extends DialogWrapper{
         init();
 
 
-
-        setTitle("Dashboard Settings");
+        setTitle("Plugin Settings");
         setOKButtonText("Save");
         setCancelButtonText("Discard");
         setResizable( false );
@@ -146,7 +145,7 @@ public class SettingsDialog extends DialogWrapper{
         SettingsStorage.storeData("pass", new String(tfText2.getPassword()));
 
         String dashUrl = tfText3.getText();
-        if ( !dashUrl.startsWith("http://") )
+        if ( !dashUrl.startsWith("http://") && !dashUrl.startsWith("https://") )
               dashUrl = "http://" + dashUrl;
 
         SettingsStorage.storeData("dashboard.url", dashUrl);
@@ -257,7 +256,7 @@ public class SettingsDialog extends DialogWrapper{
         gbPanel0.setConstraints( tfText2, gbcPanel0 );
         pnPanel0.add( tfText2 );
 
-        JBLabel lbLabel2 = new JBLabel( "Dashboard URL:"  );
+        JBLabel lbLabel2 = new JBLabel( "Source URL:"  );
         gbcPanel0.gridx = 1;
         gbcPanel0.gridy = 4;
         gbcPanel0.gridwidth = 1;

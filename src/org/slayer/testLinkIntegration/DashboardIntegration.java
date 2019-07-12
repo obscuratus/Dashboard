@@ -489,4 +489,9 @@ public class DashboardIntegration extends Source {
         return result;
     }
 
+    public void clearCache()
+    {
+
+    }
+
 }

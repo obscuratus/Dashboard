@@ -10,6 +10,8 @@ import java.util.List;
  */
 public abstract class Source {
 
+
+
     public enum TEST_STATUS
     {
         DISABLED( "Disabled-Auto-Test" ),
@@ -42,10 +44,20 @@ public abstract class Source {
 
     public static Source getSource()
     {
-        if ( sourceInstance == null )
-             sourceInstance = new DashboardIntegration();
+
+
+        if ( isEinstein() && ( sourceInstance == null || sourceInstance instanceof DashboardIntegration ) )
+             sourceInstance = new EinsteinIntegration();
+        else
+            if ( !isEinstein() && ( sourceInstance == null || sourceInstance instanceof EinsteinIntegration ) )
+                 sourceInstance = new DashboardIntegration();
 
         return sourceInstance;
+    }
+
+    public static boolean isEinstein()
+    {
+        return SettingsStorage.loadData("dashboard.url").contains("einstein");
     }
 
     public abstract List<TestEntity> getTestList( String pattern, boolean checkBoxState );
@@ -68,6 +80,8 @@ public abstract class Source {
     public abstract List<String> getDisabledTestIds();
 
     public abstract List<String> getDeprecatedTestIds();
+
+    public abstract void clearCache();
 //    public abstract List<TestFolder> getAllTestsHierarchy( String pattern, String parentID );
 
 }

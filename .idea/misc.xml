@@ -1,10 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="IdProvider" IDEtalkID="3AADEA42917EE4E5DD88E4051D6A904F" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="IntelliJ IDEA IU-171.4424.56" project-jdk-type="IDEA JDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="IntelliJ IDEA IU-183.5153.38" project-jdk-type="IDEA JDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="SvnBranchConfigurationManager">
     <option name="mySupportsUserInfoFilter" value="true" />
+  </component>
+  <component name="ideadoc.IdeaDocConfigurationGUI">
+    <doccer class="nl.piraya.ideadoc.doccer.DoccerForOverridingMethod" enabled="true">
+      <template>/**$s${@inheritDoc}$s$*/</template>
+    </doccer>
+    <doccer class="nl.piraya.ideadoc.doccer.DoccerForGetter" enabled="true">
+      <template>/**$n$$s$*$s$Getter$s$for$s$property$s$'${PROPERTY_NAME}'.$n$$s$*$n$$s$*$s$@return$s$Value$s$for$s$property$s$'${PROPERTY_NAME}'.$n$$s$*/</template>
+    </doccer>
+    <doccer class="nl.piraya.ideadoc.doccer.DoccerForSetter" enabled="true">
+      <template>/**$n$$s$*$s$Setter$s$for$s$property$s$'${PROPERTY_NAME}'.$n$$s$*$n$$s$*$s$@param$s$${PARAM_NAME}$s$Value$s$to$s$set$s$for$s$property$s$'${PROPERTY_NAME}'.$n$$s$*/</template>
+    </doccer>
+    <doccer class="nl.piraya.ideadoc.doccer.DoccerForDefaultConstructor" enabled="true">
+      <template>/**$s$Constructs$s$a$s$new$s$${CLASS_NAME}.$s$*/</template>
+    </doccer>
+    <doccer class="nl.piraya.ideadoc.doccer.DoccerForPrivateDefaultConstructor" enabled="true">
+      <template>/**$s$Do$s$not$s$instantiate$s$${CLASS_NAME}.$s$*/</template>
+    </doccer>
   </component>
 </project>

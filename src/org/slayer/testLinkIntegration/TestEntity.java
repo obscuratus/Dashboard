@@ -19,7 +19,7 @@ public class TestEntity implements Comparable<TestEntity>, Transferable{
     private String dataBaseId;
     List<StepEntity> stepEntities;
     private String parentID;
-    private String icon;
+    private String icon = "";
     private String keywords = "";
     List<String> log = new ArrayList<String>();
 
