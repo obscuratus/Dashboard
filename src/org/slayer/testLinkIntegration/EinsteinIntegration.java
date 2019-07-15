@@ -53,7 +53,9 @@ public class EinsteinIntegration extends Source {
 
             JsonObject obj = el.getAsJsonObject();
             StepEntity stepEntity = new StepEntity( Jsoup.parse( obj.get("name").getAsString() ).text() );
-            String expectedResult = Jsoup.parse( obj.get("expectedResult").getAsString() ).text();
+
+            JsonElement jsonResult = obj.get("expectedResult");
+            String expectedResult = jsonResult.isJsonNull() ? "" : Jsoup.parse( jsonResult.getAsString() ).text();
             stepEntity.addVerify( expectedResult );
             steps.add( stepEntity );
         }
