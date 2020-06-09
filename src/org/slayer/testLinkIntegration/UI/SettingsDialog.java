@@ -45,8 +45,8 @@ public class SettingsDialog extends DialogWrapper{
 
         super( project );
 
-        if ( !SettingsStorage.loadData("projectPrefix").isEmpty() )
-              projectNames = Source.getSource().getAllProjectNames();
+        if ( projectNames.isEmpty() )
+             projectNames = Source.getSource().getAllProjectNames();
 
         if ( !projectNames.isEmpty() ) {
               ComboBoxModel<String> boxModel = new DefaultComboBoxModel<>( projectNames.toArray( new String[ projectNames.size() ] ) );

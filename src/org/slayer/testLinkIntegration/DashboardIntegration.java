@@ -2,7 +2,6 @@ package org.slayer.testLinkIntegration;
 
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.Messages;
-import com.sun.tools.corba.se.idl.ExceptionEntry;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;

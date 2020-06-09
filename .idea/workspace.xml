@@ -2,54 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="401c85c0-b2fc-4d14-9293-3e879a738ebd" name="Default" comment="added Einstein integration&#10;added tests cache">
+      <change afterPath="$PROJECT_DIR$/libs/gson-2.3.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libs/json-20090211.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/META-INF/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/META-INF/plugin.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled3/com/intellij/uiDesigner/core/HorizontalInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled3/com/intellij/uiDesigner/core/HorizontalInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled3/com/intellij/uiDesigner/core/LayoutState.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled3/com/intellij/uiDesigner/core/LayoutState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled3/com/intellij/uiDesigner/core/Util.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled3/com/intellij/uiDesigner/core/Util.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled3/com/intellij/uiDesigner/core/VerticalInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled3/com/intellij/uiDesigner/core/VerticalInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled3/org/slayer/annotator/AccountScenarioValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled3/org/slayer/annotator/AccountScenarioValidator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled3/org/slayer/annotator/AccountSuggestor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled3/org/slayer/annotator/AccountSuggestor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled3/org/slayer/annotator/FieldNamesReference$FieldNamesReferenceProvider.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled3/org/slayer/annotator/FieldNamesReference$FieldNamesReferenceProvider.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled3/org/slayer/annotator/FieldNamesSuggestor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled3/org/slayer/annotator/FieldNamesSuggestor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/ChooseProvider.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/ChooseProvider.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/DashboardIntegration.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/DashboardIntegration.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/SettingsStorage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/SettingsStorage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/Source$TEST_STATUS.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/Source$TEST_STATUS.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/Source.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/Source.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/StepEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/StepEntity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/TestCaseModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/TestCaseModel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/TestEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/TestEntity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/TestFolder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/TestFolder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/UI/CollapseButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/UI/CollapseButton.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/UI/DashboardIntegrationToolFactory$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/UI/DashboardIntegrationToolFactory$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/UI/DashboardIntegrationToolFactory$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/UI/DashboardIntegrationToolFactory$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/UI/DashboardIntegrationToolFactory$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/UI/DashboardIntegrationToolFactory$11.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/UI/DashboardIntegrationToolFactory$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/UI/DashboardIntegrationToolFactory$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/UI/DashboardIntegrationToolFactory$3$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/UI/DashboardIntegrationToolFactory$3$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/UI/DashboardIntegrationToolFactory$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/UI/DashboardIntegrationToolFactory$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/UI/DashboardIntegrationToolFactory$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/UI/DashboardIntegrationToolFactory$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/UI/DashboardIntegrationToolFactory$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/UI/DashboardIntegrationToolFactory$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/UI/DashboardIntegrationToolFactory$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/UI/DashboardIntegrationToolFactory$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/UI/DashboardIntegrationToolFactory$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/UI/DashboardIntegrationToolFactory$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/UI/DashboardIntegrationToolFactory$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/UI/DashboardIntegrationToolFactory$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/UI/DashboardIntegrationToolFactory$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/UI/DashboardIntegrationToolFactory$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/UI/DashboardIntegrationToolFactory$UIForm.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/UI/DashboardIntegrationToolFactory$UIForm.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/UI/DashboardIntegrationToolFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/UI/DashboardIntegrationToolFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/UI/ExpandButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/UI/ExpandButton.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/UI/NextTestButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/UI/NextTestButton.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/UI/RefreshButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/UI/RefreshButton.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/UI/SettingsButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/UI/SettingsButton.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/UI/SettingsDialog$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/UI/SettingsDialog$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/UI/SettingsDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled3/org/slayer/testLinkIntegration/UI/SettingsDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled3/com/intellij/uiDesigner/core/SupportCode$TextWithMnemonic.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled3/com/intellij/uiDesigner/core/SupportCode$TextWithMnemonic.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled3/com/intellij/uiDesigner/core/SupportCode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled3/com/intellij/uiDesigner/core/SupportCode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/DashboardIntegration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/DashboardIntegration.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/EinsteinIntegration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/EinsteinIntegration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/StepEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/StepEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/UI/SettingsDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/UI/SettingsDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/untitled3.zip" beforeDir="false" afterPath="$PROJECT_DIR$/untitled3.zip" afterDir="false" />
     </list>
-    <ignored path="untitled3.iws" />
-    <ignored path=".idea/workspace.xml" />
-    <ignored path="$PROJECT_DIR$/out/" />
-    <ignored path=".idea/dataSources.local.xml" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -64,31 +28,6 @@
     <option name="SORT_CHILDREN" value="false" />
     <option name="SHOW_TABLE_CONSTRAINTS" value="true" />
   </component>
-  <component name="FavoritesManager">
-    <favorites_list name="untitled3" />
-  </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/org/slayer/testLinkIntegration/EinsteinIntegration.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="40" column="5" lean-forward="true" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/META-INF/plugin.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="15" column="35" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
-  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -98,21 +37,6 @@
       </list>
     </option>
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>cannot</find>
-      <find>process</find>
-      <find>cannot connect</find>
-      <find>resolveConnectionError</find>
-      <find>check</find>
-      <find>GL-70610</find>
-      <find>Log</find>
-      <find>com_p</find>
-      <find>Dashboard</find>
-      <find>skipe</find>
-      <find>calendarDisconnect_GL72021</find>
-    </findStrings>
-  </component>
   <component name="FindManager">
     <FindUsagesManager>
       <setting name="OPEN_NEW_TAB" value="true" />
@@ -121,120 +45,19 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/src/org/slayer/annotator/AccountListProvider.java" />
-        <option value="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/TestLinkIntegrationEditorPopup.java" />
-        <option value="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/DashboardItegrationToolFactory.java" />
-        <option value="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/UI/DashboardItegrationToolFactory.java" />
-        <option value="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/UI/ActionFunc.java" />
-        <option value="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/UI/TreeAction.java" />
-        <option value="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/UI/TreeActionsListener.java" />
-        <option value="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/UI/TestContextMenu.java" />
-        <option value="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/UI/MenuItems.java" />
-        <option value="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/TestLinkIntegration.java" />
-        <option value="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/UI/JDNDTree.java" />
-        <option value="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/UI/RJLTransferable.java" />
-        <option value="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/UI/DnDJTree.java" />
-        <option value="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/UI/TreeNodeEx.java" />
-        <option value="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/UI/FILTER.java" />
-        <option value="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/UI/asd.form" />
-        <option value="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/UI/SettingsDialog.form" />
-        <option value="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/UI/NonEditTableModel.java" />
-        <option value="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/UI/TableCustomCellRenderer.java" />
-        <option value="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/UI/CustomCellRenderer.java" />
-        <option value="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/UI/CompoundIcon.java" />
-        <option value="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/ClassResolver.java" />
-        <option value="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/UI/ViewTestDialog.java" />
-        <option value="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/UI/SettingsButton.java" />
-        <option value="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/UI/ExpandButton.java" />
-        <option value="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/UI/CollapseButton.java" />
-        <option value="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/UI/RefreshButton.java" />
-        <option value="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/UI/NextTestButton.java" />
-        <option value="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/UI/SearchField.java" />
-        <option value="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/TestCaseModel.java" />
-        <option value="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/MethodRunnerImpl.java" />
-        <option value="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/UI/SettingsDialog.java" />
-        <option value="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/TestEntity.java" />
-        <option value="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/Source.java" />
-        <option value="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/DashboardIntegration.java" />
-        <option value="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/TestFolder.java" />
-        <option value="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/StepEntity.java" />
-        <option value="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/SettingsStorage.java" />
-        <option value="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/UI/OOF.form" />
-        <option value="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/UI/DashboardIntegrationTool.form" />
-        <option value="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/UI/DashboardIntegrationToolFactory.java" />
-        <option value="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/UI/OOF.java" />
-        <option value="$PROJECT_DIR$/META-INF/plugin.xml" />
-        <option value="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/EinsteinIntegration.java" />
-      </list>
-    </option>
+  <component name="ProjectId" id="1bUkXaokSjgDFFIvihF6aEXdgIq" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
   </component>
-  <component name="MavenProjectNavigator">
-    <treeState />
-  </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="width" value="1440" />
-    <option name="height" value="900" />
-  </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectReloadState">
     <option name="STATE" value="0" />
   </component>
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="untitled3" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DashboardPlugin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="untitled3" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DashboardPlugin" type="462c0819:PsiDirectoryNode" />
-              <item name="libs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="untitled3" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-            </path>
-            <path>
-              <item name="untitled3" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; IntelliJ IDEA IU-183.5153.38 &gt;" type="70bed36:NamedLibraryElementNode" />
-            </path>
-            <path>
-              <item name="untitled3" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; IntelliJ IDEA IU-183.5153.38 &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="commons-io-2.6.jar" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="untitled3" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; IntelliJ IDEA IU-183.5153.38 &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="commons-io-2.6.jar" type="462c0819:PsiDirectoryNode" />
-              <item name="io" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="untitled3" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="CatdeaLogs" />
-    </panes>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
@@ -250,18 +73,27 @@
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1563192088596" />
     <property name="dynamic.classpath" value="false" />
     <property name="ignore_missing_gitignore" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/libs" />
     <property name="options.lastSelected" value="preferences.keymap" />
     <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15429688" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="org.slayer.testLinkIntegration.UI" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\sakka\IdeaProjects\Dashboard\libs" />
+      <recent name="$PROJECT_DIR$/libs" />
+      <recent name="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/UI" />
+      <recent name="$PROJECT_DIR$/src/org/slayer/testLinkIntegration" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/libs" />
       <recent name="$PROJECT_DIR$/libs/JMF-2.1.1e" />
@@ -269,26 +101,6 @@
       <recent name="$PROJECT_DIR$/src/org/slayer/testLinkIntegration" />
       <recent name="$PROJECT_DIR$/src" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/libs" />
-      <recent name="$PROJECT_DIR$/src/org/slayer/testLinkIntegration/UI" />
-      <recent name="$PROJECT_DIR$/src/org/slayer/testLinkIntegration" />
-    </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="org.slayer.testLinkIntegration.UI" />
-    </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager">
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
@@ -338,15 +150,15 @@
       </Profilers>
       <method />
     </configuration>
-    <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
-      <Host>localhost</Host>
-      <Port>5050</Port>
-    </configuration>
     <configuration default="true" type="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
+    </configuration>
+    <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
+      <Host>localhost</Host>
+      <Port>5050</Port>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -375,6 +187,7 @@
           <option name="containerStateName" value="" />
         </value>
       </option>
+      <option name="TEST_OBJECT" value="CLASS" />
       <option name="VM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" />
       <properties />
@@ -392,6 +205,7 @@
     </configuration>
     <configuration default="true" type="FlashRunConfigurationType">
       <option name="BCName" value="" />
+      <option name="IOSSimulatorDevice" value="" />
       <option name="IOSSimulatorSdkPath" value="" />
       <option name="adlOptions" value="" />
       <option name="airProgramParameters" value="" />
@@ -448,6 +262,7 @@
       <setting name="vmparams" value="" />
       <setting name="cmdLine" value="run-app" />
       <setting name="passParentEnv" value="true" />
+      <setting name="grailsApplicationRoot" value="" />
       <setting name="launchBrowser" value="false" />
       <setting name="launchBrowserUrl" value="" />
       <setting name="depsClasspath" value="false" />
@@ -467,12 +282,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="JarApplication" factoryName="JAR Application">
+    <configuration default="true" type="JarApplication">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <extension name="eu.nyerel.panda.ijplugin.runner.PandaRunConfigurationExtension" />
       <method v="2" />
     </configuration>
-    <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
+    <configuration default="true" type="JetRunConfigurationType">
       <module name="untitled3" />
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <extension name="eu.nyerel.panda.ijplugin.runner.PandaRunConfigurationExtension" />
@@ -487,7 +302,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType" factoryName="Kotlin script">
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <extension name="eu.nyerel.panda.ijplugin.runner.PandaRunConfigurationExtension" />
       <option name="filePath" />
@@ -535,6 +350,7 @@
     <configuration default="true" type="TestNG">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <extension name="eu.nyerel.panda.ijplugin.runner.PandaRunConfigurationExtension" />
+      <option name="TEST_OBJECT" value="CLASS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="moduleWithDependencies" />
@@ -549,6 +365,7 @@
       <module name="untitled3" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
       <option name="PROGRAM_PARAMETERS" value="" />
+      <alternative-path path="IntelliJ IDEA IU-201.6668.121" alternative-path-enabled="true" />
       <log_file checked="false" alias="IDEA LOG" path="$USER_HOME$/.IntelliJIdea13/system/plugins-sandbox/system/log/idea.log" />
       <RunnerSettings RunnerId="Debug">
         <option name="DEBUG_PORT" value="" />
@@ -778,6 +595,15 @@
       <workItem from="1563189935523" duration="69000" />
       <workItem from="1563190038315" duration="420000" />
       <workItem from="1563190540865" duration="801000" />
+      <workItem from="1588694102765" duration="304000" />
+      <workItem from="1588695375394" duration="1077000" />
+      <workItem from="1588845445858" duration="20000" />
+      <workItem from="1588861907898" duration="207000" />
+      <workItem from="1588862133957" duration="65000" />
+      <workItem from="1588862215084" duration="21000" />
+      <workItem from="1588862805813" duration="138000" />
+      <workItem from="1588862963774" duration="63000" />
+      <workItem from="1590583304834" duration="478000" />
     </task>
     <task id="LOCAL-00001" summary="fixed issues with line separators">
       <created>1556804224222</created>
@@ -796,9 +622,6 @@
     <option name="localTasksCounter" value="3" />
     <servers />
   </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="448918000" />
-  </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
       <is-autoscroll-to-source value="true" />
@@ -808,113 +631,15 @@
       <is-autoscroll-to-source value="true" />
     </todo-panel>
   </component>
-  <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
-    <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.45546558" visible="true" weight="0.2639485" />
-      <window_info id="Structure" order="1" sideWeight="0.5445344" side_tool="true" weight="0.23891273" />
-      <window_info id="Image Layers" order="2" />
-      <window_info id="Capture Tool" order="3" />
-      <window_info id="Nl-Palette" order="4" />
-      <window_info id="Palette&#9;" order="5" />
-      <window_info id="UI Designer" order="6" />
-      <window_info id="Favorites" order="7" sideWeight="0.44918698" side_tool="true" weight="0.3004292" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.620887" weight="0.3167702" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.69275826" weight="0.32546583" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.15522175" weight="0.3863354" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.3296582" />
-      <window_info anchor="bottom" id="FindBugs-IDEA" order="7" />
-      <window_info anchor="bottom" id="Application Servers" order="8" />
-      <window_info anchor="bottom" id="Changes" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.3279503" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5107296" side_tool="true" weight="0.3204969" />
-      <window_info anchor="bottom" id="IDEtalk Messages" order="12" weight="0.31030703" />
-      <window_info active="true" anchor="bottom" id="Messages" order="13" sideWeight="0.4899857" visible="true" weight="0.3204969" />
-      <window_info anchor="bottom" id="Version Control" order="14" weight="0.3279503" />
-      <window_info anchor="bottom" id="JProfiler" order="15" />
-      <window_info anchor="bottom" id="Tail" order="16" />
-      <window_info anchor="bottom" id="Panda Executor" order="17" />
-      <window_info anchor="bottom" id="Docker" order="18" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" order="19" />
-      <window_info anchor="right" id="SciView" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.24973147" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Designer" order="3" />
-      <window_info anchor="right" id="Palette" order="4" weight="0.32960597" />
-      <window_info anchor="right" id="Maven Projects" order="5" weight="0.32960597" />
-      <window_info anchor="right" id="IDEtalk" order="6" weight="0.32921588" />
-      <window_info anchor="right" x="2570" y="71" width="619" height="907" id="Database" order="7" weight="0.32921588" />
-      <window_info anchor="right" id="Properties" order="8" />
-      <window_info anchor="right" id="Dashboard integration" order="9" weight="0.31330472" />
-      <window_info anchor="right" id="Capture Analysis" order="10" />
-      <window_info anchor="right" id="Theme Preview" order="11" />
-      <window_info anchor="right" id="Data View" order="12" />
-      <window_info anchor="right" id="Maven" order="13" />
-    </layout>
-    <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.44144145" visible="true" weight="0.23361976" />
-      <window_info id="Structure" order="1" sideWeight="0.5585586" side_tool="true" weight="0.23361976" />
-      <window_info id="Palette&#9;" order="2" />
-      <window_info id="UI Designer" order="3" />
-      <window_info id="Favorites" order="4" side_tool="true" weight="0.24920128" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.62406814" weight="0.31863284" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.69275826" weight="0.32745314" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.7060703" visible="true" weight="0.3880926" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.3296582" />
-      <window_info anchor="bottom" id="FindBugs-IDEA" order="7" />
-      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.29392973" side_tool="true" weight="0.3880926" />
-      <window_info anchor="bottom" id="Application Servers" order="9" />
-      <window_info anchor="bottom" id="Changes" order="10" />
-      <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.4968051" weight="0.323043" />
-      <window_info anchor="bottom" id="Version Control" order="12" />
-      <window_info anchor="bottom" id="Terminal" order="13" weight="0.32894737" />
-      <window_info anchor="bottom" id="IDEtalk Messages" order="14" weight="0.31030703" />
-      <window_info anchor="bottom" id="JProfiler" order="15" />
-      <window_info anchor="bottom" id="Tail" order="16" />
-      <window_info anchor="bottom" id="Panda Executor" order="17" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.24973147" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Palette" order="3" weight="0.32960597" />
-      <window_info anchor="right" id="IDEtalk" order="4" weight="0.32921588" />
-      <window_info anchor="right" id="Maven Projects" order="5" weight="0.32960597" />
-      <window_info anchor="right" id="Designer" order="6" />
-      <window_info anchor="right" x="2570" y="71" width="619" height="907" id="Database" order="7" weight="0.32921588" />
-      <window_info anchor="right" id="Dashboard integration" order="8" weight="0.29914072" />
-    </layout-to-restore>
-  </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="RECENTLY_FILTERED_USER_GROUPS">
-                <collection />
-              </option>
-              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-                <collection />
-              </option>
-              <option name="COLUMN_ORDER">
-                <list>
-                  <option value="0" />
-                  <option value="1" />
-                  <option value="2" />
-                  <option value="3" />
-                </list>
-              </option>
-            </State>
+            <State />
           </value>
         </entry>
       </map>
@@ -933,6 +658,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -943,6 +669,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
@@ -950,32 +677,85 @@
     <MESSAGE value="added Einstein integration&#10;added tests cache" />
     <option name="LAST_COMMIT_MESSAGE" value="added Einstein integration&#10;added tests cache" />
   </component>
+  <component name="WindowStateProjectService">
+    <state x="736" y="355" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588694388844">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="736" y="355" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1588694388844" />
+    <state x="603" y="403" width="921" height="586" key="#xdebugger.evaluate" timestamp="1590583630753">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="603" y="403" width="921" height="586" key="#xdebugger.evaluate/0.0.2560.1400@0.0.2560.1400" timestamp="1590583630753" />
+    <state x="988" y="442" key="FileChooserDialogImpl" timestamp="1588862972286">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="988" y="442" key="FileChooserDialogImpl/0.0.2560.1400@0.0.2560.1400" timestamp="1588862972286" />
+    <state width="2516" height="465" key="GridCell.Tab.0.bottom" timestamp="1590583783202">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2516" height="465" key="GridCell.Tab.0.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1590583783202" />
+    <state width="2516" height="465" key="GridCell.Tab.0.center" timestamp="1590583783202">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2516" height="465" key="GridCell.Tab.0.center/0.0.2560.1400@0.0.2560.1400" timestamp="1590583783202" />
+    <state width="2516" height="465" key="GridCell.Tab.0.left" timestamp="1590583783202">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2516" height="465" key="GridCell.Tab.0.left/0.0.2560.1400@0.0.2560.1400" timestamp="1590583783202" />
+    <state width="2516" height="465" key="GridCell.Tab.0.right" timestamp="1590583783202">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2516" height="465" key="GridCell.Tab.0.right/0.0.2560.1400@0.0.2560.1400" timestamp="1590583783202" />
+    <state width="2516" height="465" key="GridCell.Tab.1.bottom" timestamp="1590583783202">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2516" height="465" key="GridCell.Tab.1.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1590583783202" />
+    <state width="2516" height="465" key="GridCell.Tab.1.center" timestamp="1590583783202">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2516" height="465" key="GridCell.Tab.1.center/0.0.2560.1400@0.0.2560.1400" timestamp="1590583783202" />
+    <state width="2516" height="465" key="GridCell.Tab.1.left" timestamp="1590583783202">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2516" height="465" key="GridCell.Tab.1.left/0.0.2560.1400@0.0.2560.1400" timestamp="1590583783202" />
+    <state width="2516" height="465" key="GridCell.Tab.1.right" timestamp="1590583783202">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2516" height="465" key="GridCell.Tab.1.right/0.0.2560.1400@0.0.2560.1400" timestamp="1590583783202" />
+    <state x="861" y="435" key="IDE.errors.dialog" timestamp="1588862176689">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="861" y="435" key="IDE.errors.dialog/0.0.2560.1400@0.0.2560.1400" timestamp="1588862176689" />
+    <state x="761" y="275" width="1409" height="710" key="SettingsEditor" timestamp="1588862975898">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="761" y="275" width="1409" height="710" key="SettingsEditor/0.0.2560.1400@0.0.2560.1400" timestamp="1588862975898" />
+    <state x="986" y="435" width="589" height="530" key="find.popup" timestamp="1590583450931">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="986" y="435" width="589" height="530" key="find.popup/0.0.2560.1400@0.0.2560.1400" timestamp="1590583450931" />
+    <state x="943" y="315" width="672" height="678" key="search.everywhere.popup" timestamp="1588845460361">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="943" y="315" width="672" height="678" key="search.everywhere.popup/0.0.2560.1400@0.0.2560.1400" timestamp="1588845460361" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>jar://$USER_HOME$/Загрузки/jdk1.8.0_65/src.zip!/javax/swing/TransferHandler.java</url>
           <line>850</line>
-          <properties />
           <option name="timeStamp" value="464" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>jar://$USER_HOME$/Загрузки/jdk1.8.0_65/src.zip!/javax/swing/TransferHandler.java</url>
           <line>851</line>
-          <properties />
           <option name="timeStamp" value="467" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/org/slayer/testLinkIntegration/TestEntity.java</url>
           <line>52</line>
-          <properties />
           <option name="timeStamp" value="474" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/org/slayer/testLinkIntegration/EinsteinIntegration.java</url>
-          <line>57</line>
-          <properties />
-          <option name="timeStamp" value="487" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -989,536 +769,6 @@
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
-  </component>
-  <component name="debuggerHistoryManager">
-    <expressions id="evaluateCodeFragment">
-      <expression>
-        <expression-string>//https://www.youtube.com/watch?v=aQU8LzYIxBU
-
-MediaPlayer mediaPanel = new MediaPlayer( new Media( &quot;https://www.youtube.com/watch?v=aQU8LzYIxBU&quot; ));
-mediaPanel.play();
-//mediaPanel.setMediaLocation(mediaURL.toString());</expression-string>
-        <language-id>JAVA</language-id>
-        <custom-info>javafx.scene.media.MediaPlayer,javafx.scene.media.Media</custom-info>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>Source.isEinstein()</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>object.get( attr )</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>object.get( attr ).getAsString()</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>JsonParser parser = new JsonParser();
-        JsonElement element = parser.parse( rawData );
-        JsonObject object = element.getAsJsonObject().getAsJsonObject(&quot;item&quot;);
- Jsoup.parse( object.get(&quot;preconditions&quot;).getAsString() ).text();</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>JsonParser parser = new JsonParser();
-        JsonElement element = parser.parse( rawData );
-        JsonObject object = element.getAsJsonObject().getAsJsonObject(&quot;item&quot;);</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>JsonParser parser = new JsonParser();
-        JsonElement element = parser.parse( rawData );
-        JsonObject object = element.getAsJsonObject();</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>JsonParser parser = new JsonParser();
-        JsonElement element = parser.parse( rawData );
-        JsonObject object = element.getAsJsonObject();
-         Jsoup.parse( object.get(&quot;preconditions&quot;).getAsString() ).text();</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>object.getAsJsonObject(&quot;item&quot;).getAsJsonArray(&quot;children&quot;)</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>nodesMap.get(folder.getParentID())</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-    </expressions>
-    <expressions id="breakpointCondition">
-      <expression>
-        <expression-string>child.getChildCount() == 0</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>object.get(&quot;type&quot;).getAsString().equalsIgnoreCase(&quot;suite&quot;)</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>p.getUserObject() instanceof String</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-    </expressions>
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/resources/manual_filter.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/favicon (1).ico">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/src.zip!/javax/swing/JTree.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="2205" column="16" selection-start-line="2205" selection-start-column="16" selection-end-line="2205" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/util.jar!/com/intellij/icons/AllIcons.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="1414" column="33" selection-start-line="1414" selection-start-column="33" selection-end-line="1414" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/slayer/testLinkIntegration/UI/RefreshButton.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="29" column="17" selection-start-line="29" selection-start-column="17" selection-end-line="29" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/slayer/testLinkIntegration/UI/ExpandButton.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/collapse-icon.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/expand-icon.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/platform-api.jar!/com/intellij/openapi/ui/DialogWrapper.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="1316" column="19" selection-start-line="1316" selection-start-column="19" selection-end-line="1316" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/slayer/testLinkIntegration/DashboardConnectionException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="39" selection-start-line="9" selection-start-column="39" selection-end-line="9" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/Automation-core-logger-2.0-SNAPSHOT.jar!/kernel/core/logger/engine/LogCommon.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="157" column="10" selection-start-line="157" selection-start-column="10" selection-end-line="157" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/Automation-core-logger-2.0-SNAPSHOT.jar!/kernel/core/logger/engine/LogHelper.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="116" column="11" selection-start-line="116" selection-start-column="11" selection-end-line="116" selection-end-column="11" />
-          <folding>
-            <element signature="e#4231#4232#0" expanded="true" />
-            <element signature="e#4282#4283#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/gson-2.8.5.jar!/com/google/gson/JsonArray.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="13" column="19" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/src.zip!/java/net/PlainSocketImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="96" column="16" selection-start-line="96" selection-start-column="16" selection-end-line="96" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/slayer/testLinkIntegration/UI/SettingsDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1905">
-          <caret line="147" column="79" selection-start-line="147" selection-start-column="79" selection-end-line="147" selection-end-column="79" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/rt.jar!/sun/misc/Unsafe.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4620">
-          <caret line="353" column="23" selection-start-line="353" selection-start-column="23" selection-end-line="353" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/src.zip!/javax/swing/tree/DefaultMutableTreeNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="252" column="15" selection-start-line="252" selection-start-column="15" selection-end-line="252" selection-end-column="15" />
-          <folding>
-            <element signature="e#4357#4358#0" expanded="true" />
-            <element signature="e#4395#4396#0" expanded="true" />
-            <element signature="e#11942#11943#0" expanded="true" />
-            <element signature="e#11975#11976#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/slayer/testLinkIntegration/TestCaseModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="68" column="31" selection-start-line="68" selection-start-column="31" selection-end-line="68" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/slayer/testLinkIntegration/ChooseProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="29" column="76" lean-forward="true" selection-start-line="29" selection-start-column="76" selection-end-line="29" selection-end-column="76" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/slayer/testLinkIntegration/ClassResolver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1275">
-          <caret line="104" column="44" selection-start-line="104" selection-start-column="44" selection-end-line="104" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/slayer/testLinkIntegration/TestEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1425">
-          <caret line="128" column="43" selection-start-line="128" selection-start-column="43" selection-end-line="128" selection-end-column="43" />
-          <folding>
-            <element signature="e#3203#3204#0" expanded="true" />
-            <element signature="e#3279#3280#0" expanded="true" />
-            <element signature="e#3627#3628#0" expanded="true" />
-            <element signature="e#3658#3659#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/slayer/testLinkIntegration/DashboardIntegration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="491" column="4" selection-start-line="491" selection-start-column="4" selection-end-line="494" selection-end-column="5" />
-          <folding>
-            <element signature="e#18250#18251#0" expanded="true" />
-            <element signature="e#18311#18312#0" expanded="true" />
-            <element signature="e#18363#18364#0" expanded="true" />
-            <element signature="e#18419#18420#0" expanded="true" />
-            <element signature="e#18473#18474#0" expanded="true" />
-            <element signature="e#18531#18532#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/slayer/testLinkIntegration/Source.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-63">
-          <caret line="59" column="56" selection-start-line="59" selection-start-column="15" selection-end-line="59" selection-end-column="56" />
-          <folding>
-            <element signature="e#1239#1240#0" expanded="true" />
-            <element signature="e#1324#1325#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/slayer/testLinkIntegration/StepEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/slayer/testLinkIntegration/SettingsStorage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="57" column="20" selection-start-line="57" selection-start-column="20" selection-end-line="57" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/slayer/testLinkIntegration/TestFolder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
-          <caret line="67" column="16" selection-start-line="67" selection-start-column="16" selection-end-line="67" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/javafx-src.zip!/javafx/scene/media/MediaView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="89" column="13" selection-start-line="89" selection-start-column="13" selection-end-line="89" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/javafx-src.zip!/javafx/scene/media/Media.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="376" column="11" selection-start-line="376" selection-start-column="11" selection-end-line="376" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/slayer/testLinkIntegration/UI/DashboardIntegrationTool.form">
-      <provider editor-type-id="text-editor" />
-      <provider selected="true" editor-type-id="ui-designer" />
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/src.zip!/java/awt/Dialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="1028" column="16" selection-start-line="1028" selection-start-column="16" selection-end-line="1028" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/slayer/testLinkIntegration/UI/DashboardIntegrationToolFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="98" column="31" selection-start-line="98" selection-start-column="31" selection-end-line="98" selection-end-column="31" />
-          <folding>
-            <element signature="e#3203#3361#0" expanded="true" />
-            <element signature="e#3360#3361#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/src.zip!/javax/swing/JFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="187" column="11" selection-start-line="187" selection-start-column="11" selection-end-line="187" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/javafx-src.zip!/javafx/scene/media/MediaPlayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="393" column="22" selection-start-line="393" selection-start-column="11" selection-end-line="393" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/mediaplayer.jar!/javax/media/bean/playerbean/MediaPlayer.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="64" column="13" selection-start-line="64" selection-start-column="13" selection-end-line="64" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/src.zip!/java/awt/Container.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3634">
-          <caret line="1148" lean-forward="true" selection-start-line="1148" selection-end-line="1148" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/forms_rt.jar!/com/intellij/uiDesigner/core/GridLayoutManager.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1543">
-          <caret line="14" column="19" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
-          <folding>
-            <element signature="e#4642#4643#0" expanded="true" />
-            <element signature="e#4702#4703#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/slayer/testLinkIntegration/UI/OOF.form">
-      <provider selected="true" editor-type-id="ui-designer" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/slayer/testLinkIntegration/UI/OOF.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="27" column="65" selection-start-line="27" selection-start-column="65" selection-end-line="27" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/src.zip!/javax/swing/JDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1080">
-          <caret line="97" column="13" selection-start-line="97" selection-start-column="13" selection-end-line="97" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/javac2.jar!/com/intellij/uiDesigner/core/GridLayoutManager.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1845">
-          <caret line="141" column="42" selection-start-line="141" selection-start-column="42" selection-end-line="141" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/jmf.jar!/javax/media/bean/playerbean/MediaPlayer.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="105" column="11" selection-start-line="105" selection-start-column="11" selection-end-line="105" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/jmf.jar!/com/sun/media/BasicPlayer.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="60" column="22" selection-start-line="60" selection-start-column="22" selection-end-line="60" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/javafx-src.zip!/com/sun/media/jfxmedia/MediaPlayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="46" column="17" selection-start-line="46" selection-start-column="17" selection-end-line="46" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/jmf.jar!/javax/media/Player.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/src.zip!/javax/swing/JPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="470">
-          <caret line="64" column="13" selection-start-line="64" selection-start-column="13" selection-end-line="64" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/EinsteinClientApi-1.0.1-SNAPSHOT.jar!/ods/einstein/api/EinsteinClient.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-857">
-          <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/commons-io-2.6.jar!/org/apache/commons/io/IOUtils.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="52" column="43" lean-forward="true" selection-start-line="52" selection-start-column="43" selection-end-line="52" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/EinsteinClientApi-1.0.1-SNAPSHOT.jar!/ods/einstein/api/auth/AuthImpl.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="66" column="32" selection-start-line="66" selection-start-column="32" selection-end-line="66" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/META-INF/plugin.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="35" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/libs/commons-io-2.6.jar/META-INF/maven/commons-io/commons-io/pom.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/slayer/testLinkIntegration/EinsteinIntegration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="40" column="5" lean-forward="true" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ArtifactsStructureConfigurable.UI">
-        <settings>
-          <artifact-editor />
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="FacetStructureConfigurable.UI">
-        <settings>
-          <last-edited>No facets are configured</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="GlobalLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="JdkListConfigurable.UI">
-        <settings>
-          <last-edited>1.8</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ModuleStructureConfigurable.UI">
-        <settings>
-          <last-edited>untitled3</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-                <option value="0.6" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectLibrariesConfigurable.UI">
-        <settings>
-          <last-edited>libs</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
   </component>
   <component name="se.expertsystem.intellij.aop.aspectj.AspectJProjectComponent">
     <setting name="isActivated" value="false" />

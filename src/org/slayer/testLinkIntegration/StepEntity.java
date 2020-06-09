@@ -12,6 +12,7 @@ public class StepEntity {
 
     String step;
     List<String> verifySteps;
+    int order;
 
     public StepEntity( String step )
     {

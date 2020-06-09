@@ -1,17 +1,14 @@
 package org.slayer.testLinkIntegration;
 
+
 import com.google.gson.*;
 import ods.einstein.api.EinsteinClient;
 import ods.einstein.api.auth.AuthImpl;
-import org.apache.commons.lang.StringEscapeUtils;
+
 import org.jsoup.Jsoup;
-import org.junit.Test;
 import org.slayer.testLinkIntegration.UI.FILTER;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class EinsteinIntegration extends Source {
@@ -20,16 +17,29 @@ public class EinsteinIntegration extends Source {
     Gson gson = new GsonBuilder().create();
     Project[] projects = new Project[0];
     HashMap<String, String> cache = new HashMap<>();
+    private String user;
+    private String pass;
 
     private EinsteinClient getClient()
     {
-        if ( client == null )
+        boolean reload = false;
+        if ( user == null || !user.equals( SettingsStorage.loadData("user") )) {
+             user = SettingsStorage.loadData("user");
+             reload = true;
+        }
+
+        if ( pass == null || pass.equals( SettingsStorage.loadData("pass") )) {
+             pass = SettingsStorage.loadData("pass");
+             reload = true;
+        }
+
+        if ( client == null || reload )
 
              client = EinsteinClient.setup()
                 .host( SettingsStorage.loadData("dashboard.url") )
                 .authorizeBy( new AuthImpl() )
-                .user( SettingsStorage.loadData("user") )
-                .password( SettingsStorage.loadData("pass") ).build();
+                .user( user )
+                .password( pass ).build();
 
         return client;
     }
@@ -57,9 +67,11 @@ public class EinsteinIntegration extends Source {
             JsonElement jsonResult = obj.get("expectedResult");
             String expectedResult = jsonResult.isJsonNull() ? "" : Jsoup.parse( jsonResult.getAsString() ).text();
             stepEntity.addVerify( expectedResult );
+            stepEntity.order = obj.get("order").getAsInt();
             steps.add( stepEntity );
         }
 
+        Collections.sort( steps, (it, it2) -> it.order - it2.order );
         return steps;
     }
 
@@ -101,8 +113,9 @@ public class EinsteinIntegration extends Source {
     @Override
     public List<TestFolder> getAllTestsHierarchy( String pattern, FILTER filter) {
 
-        String id = Arrays.stream( getProjects() ).filter( it -> it.prefix.equals( pattern ))
-                .findAny().get().id;
+        Project[] projects = getProjects();
+        String id = Arrays.stream( projects ).filter( it -> it.prefix.equals( pattern ))
+                .findAny().orElse( projects[0] ).id;
         String rawData = getClient().getSuites( Integer.parseInt( id ) );
 
         List<TestFolder> folders = new ArrayList<>();
